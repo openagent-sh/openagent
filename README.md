@@ -38,137 +38,57 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 
 ## System Overview
 
-```mermaid
-graph TB
-    subgraph "OpenCode CLI/TUI"
-        CLI["OpenCode Terminal"]
-    end
-
-    subgraph "Entry Points"
-        CMD["/openagent"]
-        CMD2["/onboarding"]
-        CMD3["/capture"]
-        CMD4["/remember"]
-        CMD5["/summarize"]
-    end
-
-    subgraph "Context (loaded by /openagent)"
-        SOUL[SOUL.md<br/>Core identity & values]
-        AGENT[AGENT.md<br/>Your personal context]
-        MEMORY[Memory<br/>Short + Long term]
-        INBOX[Tasks/Inbox<br/>Current work]
-    end
-
-    subgraph "System Components"
-        AGENTS[Agents<br/>8 specialized agents]
-        SKILLS[Skills<br/>OpenCode & expertise]
-        COMMANDS[Commands<br/>capture/remember/summarize]
-        WORKSPACES[Workspaces<br/>dev/business/personal]
-        SCRIPTS[Scripts<br/>Setup & automation]
-    end
-
-    subgraph "Memory System"
-        MEM_LONG[Long-term<br/>Preferences, Patterns, Timeline]
-        MEM_SHORT[Short-term<br/>Weekly files]
-        MEM_SESSION[Session Summaries<br/>Session docs]
-    end
-
-    subgraph "Agent Types"
-        AG_CORE[OpenAgent<br/>Main system]
-        AG_ONBOARD[Onboarding Agent<br/>Setup & personalization]
-        AG_DEV[Developer Agents<br/>Code work]
-        AG_FRONTEND[Frontend Designer<br/>UI/UX]
-        AG_REVIEW[Code Reviewer<br/>Quality checks]
-        AG_OCODE[OpenCode Agent<br/>Customization]
-        AG_MEM[Memory Agent<br/>Session summaries]
-        AG_CAP[Capture Agent<br/>Task inbox]
-    end
-
-    subgraph "Workspace Areas"
-        WS_DEV[dev/<br/>Software projects]
-        WS_BUS[business/<br/>Client work]
-        WS_PER[personal/<br/>Life & hobbies]
-        WS_MISC[misc/<br/>Everything else]
-    end
-
-    CLI --> CMD
-    CLI --> CMD2
-    CLI --> CMD3
-    CLI --> CMD4
-    CLI --> CMD5
-
-    CMD --> SOUL
-    CMD --> AGENT
-    CMD --> MEMORY
-    CMD --> INBOX
-
-    SOUL -.-> AG_CORE
-    AGENT -.-> AG_CORE
-
-    AG_CORE --> AGENTS
-    AG_CORE --> SKILLS
-    AG_CORE --> COMMANDS
-    AG_CORE --> WORKSPACES
-    AG_CORE --> SCRIPTS
-
-    AGENTS --> AG_ONBOARD
-    AGENTS --> AG_DEV
-    AGENTS --> AG_FRONTEND
-    AGENTS --> AG_REVIEW
-    AG_OCODE -.-> SKILLS
-    AG_MEM -.-> COMMANDS
-    AG_CAP -.-> COMMANDS
-
-    MEMORY --> MEM_LONG
-    MEMORY --> MEM_SHORT
-    MEMORY --> MEM_SESSION
-
-    WORKSPACES --> WS_DEV
-    WORKSPACES --> WS_BUS
-    WORKSPACES --> WS_PER
-    WORKSPACES --> WS_MISC
-
-    style CLI fill:#1f2937,stroke:#374151,stroke-width:2px,color:#fff
-    style CMD fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
-    style SOUL fill:#dbeafe,stroke:#2563eb
-    style AGENT fill:#dbeafe,stroke:#2563eb
-    style MEMORY fill:#fef3c7,stroke:#d97706
-    style INBOX fill:#f3e8ff,stroke:#9333ea
-    style AG_CORE fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-
-    classDef context fill:#dbeafe,stroke:#2563eb,stroke-width:2px
-    classDef system fill:#e5e7eb,stroke:#374151
-    classDef agent fill:#bfdbfe,stroke:#3b82f6
-    classDef workspace fill:#ecfccb,stroke:#65a30d
-    classDef memory fill:#fef3c7,stroke:#d97706
-
-    SOUL:::context
-    AGENT:::context
-    MEMORY:::context
-    INBOX:::context
-
-    AGENTS:::system
-    SKILLS:::system
-    COMMANDS:::system
-    WORKSPACES:::system
-    SCRIPTS:::system
-
-    AG_ONBOARD:::agent
-    AG_DEV:::agent
-    AG_FRONTEND:::agent
-    AG_REVIEW:::agent
-    AG_OCODE:::agent
-    AG_MEM:::agent
-    AG_CAP:::agent
-
-    WS_DEV:::workspace
-    WS_BUS:::workspace
-    WS_PER:::workspace
-    WS_MISC:::workspace
-
-    MEM_LONG:::memory
-    MEM_SHORT:::memory
-    MEM_SESSION:::memory
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         OPENAGENT                               │
+│                  Personal AI Cofounder System                   │
+└─────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        OPENCODE CLI                             │
+│  Terminal TUI • Agents • Commands • Skills • Plugins            │
+└─────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      CONTEXT LAYER                              │
+├────────────────┬────────────────┬────────────────┬──────────────┤
+│   SOUL.md      │   AGENT.md     │    Memory      │    Tasks     │
+│  (Identity)    │    (User)      │                │              │
+│                │                │  ┌──────────┐  │  ┌────────┐  │
+│  Core values   │  Your context  │  │MEMORY.md │  │  │ inbox/ │  │
+│  How agent     │  Professional  │  │(long)    │  │  │backlog/│  │
+│  operates      │  Preferences   │  ├──────────┤  │  └────────┘  │
+│                │  Goals         │  │ short/   │  │              │
+│                │                │  │(weekly)  │  │              │
+│                │                │  ├──────────┤  │              │
+│                │                │  │sessions/ │  │              │
+│                │                │  │(logs)    │  │              │
+│                │                │  └──────────┘  │              │
+└────────────────┴────────────────┴────────────────┴──────────────┘
+                               │
+         ┌─────────────────────┼─────────────────────┐
+         ▼                     ▼                     ▼
+┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+│     Agents       │  │     Skills       │  │   Workspaces     │
+│                  │  │                  │  │                  │
+│  onboarding      │  │  opencode-skill  │  │  dev/            │
+│  developer-1     │  │  frontend-design │  │  business/       │
+│  developer-2     │  │  skill-creator   │  │  personal/       │
+│  frontend-design │  │                  │  │  misc/           │
+│  memory-agent    │  │                  │  │                  │
+│  opencode-agent  │  │                  │  │                  │
+└──────────────────┘  └──────────────────┘  └──────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        COMMANDS                                 │
+├────────────────┬────────────────┬────────────────┬──────────────┤
+│  /openagent    │   /capture     │   /remember    │  /summarize  │
+│  Load full     │   Quick task   │   Save to      │  Session     │
+│  context       │   to inbox     │   long-term    │  summary     │
+└────────────────┴────────────────┴────────────────┴──────────────┘
 ```
 
 **How it works:**
