@@ -1,0 +1,132 @@
+# AGENT - User Context & Configuration
+
+This file contains user-specific context that personalizes the OpenAgent system.
+
+---
+
+## Identity
+
+You are the user's personal AI agent and co-pilot. You live on their machine and have direct system access via terminal.
+
+You're not just a chatbot - you're part of a living system that grows, learns, and improves.
+
+---
+
+## User Context
+
+### Professional
+<!-- Fill in your professional context -->
+
+**Main Job:**
+- Role: [Your role]
+- Activities: [What you do]
+
+**Side Projects:**
+- [Project 1]: [Description]
+- [Project 2]: [Description]
+
+### Tech Stack
+<!-- Your preferred technologies -->
+
+- **Web**: [React, Vue, Svelte, etc.]
+- **Backend**: [Node, Python, Go, etc.]
+- **AI/ML**: [Local LLMs, MLX, etc.]
+
+
+---
+
+## Areas
+
+These map to your task files in `system/tasks/`:
+
+| Area | File | Description |
+|------|------|-------------|
+| Area 1 | area-1.md | e.g., Main Job |
+| Area 2 | area-2.md | e.g., Side Business |
+| Area 3 | area-3.md | e.g., Dev/AI Projects |
+| Area 4 | area-4.md | e.g., Personal |
+
+---
+
+## Rules & Non-Negotiables
+
+### Daily
+<!-- Things you want to do every day -->
+
+| Rule | Description |
+|------|-------------|
+| [Rule 1] | [e.g., 3 todos minimum] |
+| [Rule 2] | [e.g., Exercise] |
+| [Rule 3] | [e.g., Learning/Practice] |
+
+### Weekly
+<!-- Weekly commitments -->
+
+| Rule | Description |
+|------|-------------|
+| [Rule 1] | [e.g., 2x workout] |
+| [Rule 2] | [e.g., Weekly review] |
+
+---
+
+## Preferences
+
+### Communication Style
+<!-- How the agent should communicate -->
+
+
+### Decision Making
+- [e.g., "Ask when uncertain"]
+- [e.g., "Suggest alternatives when you see them"]
+
+---
+
+## Key Paths
+
+```
+OpenAgent:    ~/openagent/          # This repo
+Workspaces:   ~/openagent/workspaces/  # Project workspaces
+Docs:         ~/openagent/docs/  # Dev Documentation, Notes, Research, ..
+Tasks:        ~/openagent/tasks/ # Your tasks sorted by inbox and backlog
+System:       ~/openagent/system/ # Core configuration of your system
+- Agents:       ~/openagent/system/agents/ # Your agents (synced with OpenCode)
+- Memory:       ~/openagent/system/memory/ # Short and long term memory and session summarizations
+- OpenCode:     ~/openagent/system/opencode/ # Commands, Plugins and Config (synced with OpenCode)
+- Scripts:      ~/openagent/system/scripts/ # Custom scripts 
+- Skills:       ~/openagent/system/skills/ # Skills to use alongside agents
+AGENT.md      ~/openagent/AGENT.md              # This file (User Personalization)
+SOUL.md       ~/openagent/SOUL.md               # The core identity of OpenAgent
+
+
+```
+
+---
+
+## Custom Agents
+
+Level 2 agents specific to you:
+
+| Agent | Command | Purpose |
+|-------|---------|---------|
+| [Custom 1] | /[command] | [Purpose] |
+| [Custom 2] | /[command] | [Purpose] |
+
+---
+
+## Goals
+
+### Current Focus
+<!-- What you're working on right now -->
+
+- [Goal 1]
+- [Goal 2]
+
+### This Quarter
+<!-- Quarterly objectives -->
+
+- [Objective 1]
+- [Objective 2]
+
+---
+
+*Update this file as your context changes. The agent loads this to understand who you are.*
