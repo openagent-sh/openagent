@@ -1,9 +1,9 @@
-# OpenAgent
+# OpenAgent - Your Cofounder for Life
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-blue)
-![Website](https://img.shields.io/badge/Website-open--agent.sh-green)
-![X](https://img.shields.io/badge/X-%40openagent__-black)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
+[![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-blue)](https://opencode.ai)
+[![Website](https://img.shields.io/badge/Website-open--agent.sh-green)](https://open-agent.sh)
+[![X](https://img.shields.io/badge/X-%40openagent__-black)](https://x.com/openagent_)
 
 > Your personal AI cofounder for life.
 
@@ -41,15 +41,15 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 ```mermaid
 graph TB
     subgraph "OpenCode CLI/TUI"
-        CLI[/OpenCode Terminal/]
+        CLI["OpenCode Terminal"]
     end
 
     subgraph "Entry Points"
-        CMD[/openagent]
-        CMD2[/onboarding]
-        CMD3[/capture]
-        CMD4[/remember]
-        CMD5[/summarize]
+        CMD["/openagent"]
+        CMD2["/onboarding"]
+        CMD3["/capture"]
+        CMD4["/remember"]
+        CMD5["/summarize"]
     end
 
     subgraph "Context (loaded by /openagent)"
@@ -236,7 +236,7 @@ opencode
 
 ```bash
 # Capture a quick idea
-/capture apply to vercel oss by monday
+/capture add dark mode to the dashboard
 
 # Save something to remember
 /remember stop running the dev server!!!!
@@ -295,16 +295,6 @@ No. Start with `/openagent` and the basic commands. Add agents, skills, and work
 ### Can I customize the agents?
 
 Absolutely. All agents are in `system/agents/` — edit them, create your own, remove what you don't use. It's your system.
-
-### Is my data private?
-
-Yes. OpenAgent runs locally on your machine. Your memory, tasks, and AGENT.md are never sent anywhere (except to the AI models you choose to use via OpenCode).
-
----
-
-## Tech Stack
-
-- **CLI**: [OpenCode](https://opencode.ai) — The AI-powered terminal
 
 ---
 
