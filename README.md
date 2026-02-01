@@ -11,7 +11,7 @@ A living AI agent system built on [OpenCode](https://opencode.ai) that makes you
 
 ---
 
-## Why OpenAgent?
+## Why should i use this?
 
 **The problem:** You use Claude Code, ChatGPT, OpenCode and Cursor - your context is scattered across different tools. Every time you start a new conversation, you're starting from zero.
 
@@ -32,94 +32,7 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 
 ---
 
-![OpenAgent Demo](public/demo.gif)
-
----
-
-## System Overview
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         OPENAGENT                               │
-│                  Personal AI Cofounder System                   │
-└─────────────────────────────────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        OPENCODE CLI                             │
-│  Terminal TUI • Agents • Commands • Skills • Plugins            │
-└─────────────────────────────────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      CONTEXT LAYER                              │
-├────────────────┬────────────────┬────────────────┬──────────────┤
-│   SOUL.md      │   AGENT.md     │    Memory      │    Tasks     │
-│  (Identity)    │    (User)      │                │              │
-│                │                │  ┌──────────┐  │  ┌────────┐  │
-│  Core values   │  Your context  │  │MEMORY.md │  │  │ inbox/ │  │
-│  How agent     │  Professional  │  │(long)    │  │  │backlog/│  │
-│  operates      │  Preferences   │  ├──────────┤  │  └────────┘  │
-│                │  Goals         │  │ short/   │  │              │
-│                │                │  │(weekly)  │  │              │
-│                │                │  ├──────────┤  │              │
-│                │                │  │sessions/ │  │              │
-│                │                │  │(logs)    │  │              │
-│                │                │  └──────────┘  │              │
-└────────────────┴────────────────┴────────────────┴──────────────┘
-                               │
-         ┌─────────────────────┼─────────────────────┐
-         ▼                     ▼                     ▼
-┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
-│     Agents       │  │     Skills       │  │   Workspaces     │
-│                  │  │                  │  │                  │
-│  onboarding      │  │  opencode-skill  │  │  dev/            │
-│  developer-1     │  │  frontend-design │  │  business/       │
-│  developer-2     │  │  skill-creator   │  │  personal/       │
-│  frontend-design │  │                  │  │  misc/           │
-│  code-reviewer   │  │                  │  │                  │
-│  opencode-agent  │  │                  │  │                  │
-└──────────────────┘  └──────────────────┘  └──────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        COMMANDS                                 │
-├────────────────┬────────────────┬────────────────┬──────────────┤
-│  /openagent    │   /capture     │   /remember    │  /summarize  │
-│  Load full     │   Quick task   │   Save to      │  Session     │
-│  context       │   to inbox     │   long-term    │  summary     │
-└────────────────┴────────────────┴────────────────┴──────────────┘
-```
-
-**How it works:**
-1. **/openagent** loads your full context (SOUL + AGENT + Memory + Tasks)
-2. **Agents** handle specialized work (dev, frontend design, onboarding)
-3. **Skills** provide expertise (OpenCode customization, system documentation)
-4. **Commands** capture ideas, save memories, summarize sessions
-5. **Workspaces** organize your projects by area
-
----
-
-## Onboarding
-
-New to OpenAgent? After setup, run `/onboarding` to personalize your system (takes 5 minutes).
-
-The onboarding flow will ask about:
-- Your name (optional)
-- Current projects and work areas
-- Workspaces to create (dev, business, personal, etc.)
-- Preferences and communication style
-- This week's focus
-
-After onboarding, you'll have:
-- ✅ Personalized `AGENT.md` with your context
-- ✅ Workspaces set up for your areas
-- ✅ Long-term memory initialized
-- ✅ This week's focus ready to go
-
-**Note:** Technical setup (symlinks, agents, commands) is handled by `setup.sh` before onboarding.
-
-[See full onboarding flow](system/agents/onboarding-agent.md)
+![OpenAgent Demo](https://github.com/user-attachments/assets/dd1535eb-fa39-4e96-bf61-6d9e92d1e9a6)
 
 ---
 
@@ -156,9 +69,15 @@ cd openagent
 ### After Installation
 
 ```bash
-# 1. (Optional) Add shell alias to your ~/.zshrc or ~/.bashrc
-# Copy the command shown by setup, for example:
-alias openagent="cd ~/openagent && opencode --agent openagent --prompt Hello"
+# 1. (Optional) Add shell alias for easy launching
+# For zsh (most macOS users):
+echo 'alias openagent="cd $OPENAGENT_ROOT && opencode --agent openagent --prompt Hello"' >> ~/.zshrc && source ~/.zshrc
+
+# For bash:
+echo 'alias openagent="cd $OPENAGENT_ROOT && opencode --agent openagent --prompt Hello"' >> ~/.bashrc && source ~/.bashrc
+
+# If you get API errors, add --model flag:
+# alias openagent="cd $OPENAGENT_ROOT && opencode --agent openagent --model anthropic/claude-sonnet-4-5 --prompt Hello"
 
 # 2. Start OpenCode
 opencode
@@ -183,27 +102,93 @@ opencode
 /summarize 
 ```
 
-### Two Ways to Launch OpenAgent
+---
 
-**1. Shell Alias (Recommended)** - Launch from anywhere
-```bash
-# Add to your ~/.zshrc (setup.sh prompts for this)
-alias openagent="cd /path/to/openagent && opencode --agent openagent --prompt Hello"
+## Onboarding
 
-# Then from any directory:
-openagent
+After setup, run `/onboarding` to personalize your system (takes 5-10 minutes).
+The more information you share, the better your system will be set up
+
+The onboarding flow will ask about:
+- Your name (optional)
+- Current projects and work areas
+- Workspaces to create (dev, business, personal, etc.)
+- Preferences and communication style
+- This week's focus
+
+After onboarding, you'll have:
+- ✅ Personalized `AGENT.md` with your context
+- ✅ Workspaces set up for your areas
+- ✅ Long-term memory initialized
+- ✅ This week's focus ready to go
+
+**Note:** Technical setup (symlinks, agents, commands) is handled by `setup.sh` before onboarding.
+
+[See full onboarding flow](system/agents/onboarding-agent.md)
+
+---
+
+## System Overview
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         OPENAGENT                               │
+│                  Personal AI Cofounder System                   │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        OPENCODE CLI                             │
+│  Terminal TUI • Agents • Commands • Skills • Plugins            │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      CONTEXT LAYER                              │
+├────────────────┬────────────────┬────────────────┬──────────────┤
+│   SOUL.md      │   AGENT.md     │    Memory      │    Tasks     │
+│  (Identity)    │    (User)      │                │              │
+│                │                │  ┌──────────┐  │  ┌────────┐  │
+│  Core values   │  Your context  │  │MEMORY.md │  │  │ inbox/ │  │
+│  How agent     │  Professional  │  │(long)    │  │  │backlog/│  │
+│  operates      │  Preferences   │  ├──────────┤  │  └────────┘  │
+│                │  Goals         │  │ short/   │  │              │
+│                │                │  │(weekly)  │  │              │
+│                │                │  ├──────────┤  │              │
+│                │                │  │sessions/ │  │              │
+│                │                │  │(logs)    │  │              │
+│                │                │  └──────────┘  │              │
+└────────────────┴────────────────┴────────────────┴──────────────┘
+                                │
+          ┌─────────────────────┼─────────────────────┐
+          ▼                     ▼                     ▼
+┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+│     Agents       │  │     Skills       │  │   Workspaces     │
+│                  │  │                  │  │                  │
+│  onboarding      │  │  opencode-skill  │  │  dev/            │
+│  developer-1     │  │  frontend-design │  │  business/       │
+│  developer-2     │  │  skill-creator   │  │  personal/       │
+│  frontend-design │  │                  │  │  misc/           │
+│  code-reviewer   │  │                  │  │                  │
+│  opencode-agent  │  │                  │  │                  │
+└──────────────────┘  └──────────────────┘  └──────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        COMMANDS                                 │
+├────────────────┬────────────────┬────────────────┬──────────────┤
+│  /openagent    │   /capture     │   /remember    │  /summarize  │
+│  Load full     │   Quick task   │   Save to      │  Session     │
+│  context       │   to inbox     │   long-term    │  summary     │
+└────────────────┴────────────────┴────────────────┴──────────────┘
 ```
 
-**2. Command in OpenCode** - When already in a session
-```bash
-# First start OpenCode normally
-opencode
-
-# Then load OpenAgent context
-/openagent
-```
-
-Both load the same context (SOUL.md + AGENT.md + Memory + Tasks), just different entry points.
+**How it works:**
+1. **/openagent** loads your full context (SOUL + AGENT + Memory + Tasks)
+2. **Agents** handle specialized work (dev, frontend design, onboarding)
+3. **Skills** provide expertise (OpenCode customization, system documentation)
+4. **Commands** capture ideas, save memories, summarize sessions
+5. **Workspaces** organize your projects by area
 
 ---
 
@@ -214,30 +199,7 @@ Both load the same context (SOUL.md + AGENT.md + Memory + Tasks), just different
 - [Memory System](system/memory/README.md) — How memory works
 - [Workspaces Guide](workspaces/README.md) — Organizing your work areas
 
----
-
-## How It Works: Symlinks & Automatic Sync
-
-OpenAgent uses **symlinks** to connect your OpenAgent files with OpenCode's config:
-
-```
-~/.config/opencode/agents/     → ~/openagent/system/agents/
-~/.config/opencode/commands/   → ~/openagent/system/opencode/commands/
-~/.config/opencode/skills/     → ~/openagent/system/skills/
-~/.config/opencode/plugins/    → ~/openagent/system/opencode/plugins/
-```
-
-**This means:**
-- Edit an agent in `system/agents/developer-1-agent.md` → instantly available in OpenCode
-- Changes sync automatically both ways
-- OpenAgent is your single source of truth
-- No manual sync needed
-
-**What if I have existing OpenCode agents?**
-
-Setup.sh handles this with two options:
-1. **Merge & Symlink** (recommended) - Moves your files into OpenAgent, then creates symlinks
-2. **Keep Separate** - Adds OpenAgent files alongside yours (manual sync needed)
+**Symlink Setup:** OpenAgent uses symlinks to sync with OpenCode (`~/.config/opencode/` → `~/openagent/system/`). Changes are automatic both ways. Run `./system/scripts/setup.sh` to set up.
 
 ---
 
