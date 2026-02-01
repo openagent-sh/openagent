@@ -20,7 +20,7 @@ Collect ALL information by asking the user directly. Ask fresh, even if files ex
 
 ## Your Task
 
-When the user types `/onboarding`, immediately start the onboarding flow using the `question` tool. Ask questions across 4 pages, collect all answers, then create/update the files listed in the Output section.
+Start the onboarding flow using the `question` tool. Ask questions across 4 pages, collect all answers, then create/update the files listed in the Output section.
 
 **IMPORTANT:** Use the `question` tool for each page. This is a built-in OpenCode tool that presents interactive questions with checkboxes and a free input field.
 
@@ -152,6 +152,7 @@ If user selects "Yes", ask 1-2 targeted follow-up questions based on their answe
 ## Output
 
 After collecting all answers from all pages, create/update these files:
+(These are rough templates - add Info based on what the user shared with you)
 
 ### AGENT.md
 
