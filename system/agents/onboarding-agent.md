@@ -21,7 +21,9 @@ Collect ALL information by asking the user directly. Ask fresh, even if files ex
 
 When the user types `/onboarding`, immediately start the onboarding flow by calling `question()` tool for each of the following questions. Collect all answers, then create/update the files listed in the Output section.
 
-**IMPORTANT:** The `question()` tool is a built-in OpenCode tool. Just call it directly - no markdown blocks, no "Ask:" prefixes. Execute it immediately.
+**IMPORTANT:** The `question()` tool is a built-in OpenCode tool. Just call it directly - no markdown blocks, no \"Ask:\" prefixes. Execute it immediately.
+
+**NOTE:** This is personalization only - technical setup (symlinks, shell alias) is handled by setup.sh before this runs.
 
 ---
 
@@ -115,42 +117,7 @@ question({
   }]
 })
 
-### 6. Choose Agents & Commands
-
-question({
-  questions: [{
-    question: "Which agents and commands do you want to use?",
-    header: "Features",
-    options: [
-      { label: "/openagent", description: "Main agent with full context - RECOMMENDED" },
-      { label: "/capture", description: "Quick task capture - RECOMMENDED" },
-      { label: "/remember", description: "Save to memory - RECOMMENDED" },
-      { label: "/summarize", description: "Session summaries - RECOMMENDED" },
-      { label: "/opencode-agent", description: "OpenCode customization help" },
-      { label: "Code Reviewer", description: "Agent for reviewing your code" },
-      { label: "Developer 1 & 2", description: "Development sub-agents" },
-      { label: "Frontend Designer", description: "To build beautiful UI and UX" },
-      { label: "Skip", description: "Enable everything" }
-    ],
-    multiple: true
-  }]
-})
-
-### 7. Shell Integration
-
-question({
-  questions: [{
-    question: "Do you want to add 'openagent' as a .zshrc command?",
-    header: "Shell Integration",
-    options: [
-      { label: "Yes, add alias", description: "Type 'openagent' from anywhere" },
-      { label: "No thanks", description: "I'll navigate manually" },
-      { label: "Skip", description: "Decide later" }
-    ]
-  }]
-})
-
-### 8. This Week's Focus
+### 6. This Week's Focus
 
 question({
   questions: [{
@@ -167,7 +134,7 @@ question({
   }]
 })
 
-### 9. Anything Else
+### 7. Anything Else
 
 question({
   questions: [{
@@ -183,7 +150,7 @@ question({
 
 ## Output
 
-After collecting all answers from all 9 questions, create/update these files:
+After collecting all answers from all 7 questions, create/update these files:
 
 ### AGENT.md
 
@@ -250,30 +217,10 @@ Based on their work areas, create workspace folders:
 
 Initialize this week's focus file:
 - Create file in `system/memory/short/` with current week's date range
-- Filename format: `DD.MM-DD.MM.YYYY.md` (Monday date - Sunday date)
+- Filename format: `DD.MM.YYYY-DD.MM.YYYY.md` (Monday date - Sunday date)
 - Use `system/memory/short/TEMPLATE_WEEKLY.md` as template
 - Add their "this week" tasks
 - Add note: "Just onboarded to OpenAgent"
-
-### Shell Alias (if requested)
-
-If they chose "Yes, add alias" in question 7, get the current OpenAgent directory path and create the alias:
-
-```bash
-# Get the current directory (where OpenAgent is installed)
-OPENAGENT_ROOT="$(pwd)"
-
-# Add alias that launches OpenCode with the openagent agent from anywhere
-echo "alias openagent=\"cd $OPENAGENT_ROOT && opencode --agent openagent --prompt Hello\"" >> ~/.zshrc
-```
-
-This allows the user to type `openagent` from any directory and it will:
-1. Change to their OpenAgent folder
-2. Launch OpenCode with the openagent agent (full context) already loaded
-3. Auto-trigger with "Hello" prompt
-
-NOTE: If the user gets an API/model error, they may need to add `--model PROVIDER/MODEL` to the alias.
-Example: `--model anthropic/claude-sonnet-4-5` or `--model openai/gpt-4o`
 
 ---
 
@@ -288,7 +235,6 @@ Great! I've set up your OpenAgent:
 - Workspaces - [list their areas]
 - Long-term Memory (MEMORY.md) - Initialized
 - This week's focus - Ready to go
-- Commands enabled - [list what they chose]
 
 ---
 
@@ -317,8 +263,11 @@ Great! I've set up your OpenAgent:
 
 You're all set! 
 
-If you added the shell alias, restart your terminal and type `openagent` to get started.
-Otherwise, run `opencode` and type `/openagent`.
+Try these commands to get started:
+- /openagent - Load full context and start working
+- /capture - Quick task capture
+- /remember - Save something to memory
+- /summarize - End session with summary
 
 Welcome to OpenAgent!
 ```

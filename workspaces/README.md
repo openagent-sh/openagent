@@ -88,29 +88,25 @@ Related to: /workspaces/openagent/
 OpenAgent personal AI operating system development.
 
 - **Type**: Dev / System work
-- **Contents**: Architecture, development, documentation
-- **Related**: system/tasks/dev.md, SOUL.md
+- **Contents**: Architecture, development, documentation, research
 
 ### dev/
 Software development projects.
 
 - **Type**: Development
 - **Contents**: Coding projects, technical work, experiments
-- **Related**: system/tasks/dev.md, AGENT.md
 
 ### business/
 Business and client work.
 
 - **Type**: Business
 - **Contents**: Client projects, consulting, business tasks
-- **Related**: system/tasks/business.md, AGENT.md
 
 ### personal/
 Personal life and hobbies.
 
 - **Type**: Personal
 - **Contents**: Personal projects, hobbies, life management
-- **Related**: system/tasks/personal.md, AGENT.md
 
 ### misc/
 Everything else that doesn't fit into other workspaces.

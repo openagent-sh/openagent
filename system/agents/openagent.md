@@ -17,6 +17,9 @@ tools:
 
 OpenAgent Mode activated. Loading context.
 
+First, check for updates (runs silently in background):
+@system/scripts/check-update.sh
+
 Read the following files:
 
 1. Core System:

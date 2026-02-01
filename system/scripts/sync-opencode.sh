@@ -1,191 +1,58 @@
 #!/bin/bash
 
-# OpenAgent OpenCode Sync Script
-# Syncs system/agents/ and system/opencode/ to ~/.config/opencode/
+# OpenAgent → OpenCode Sync (Manual Tool)
+#
+# This script is OPTIONAL and only needed if you're NOT using symlinks.
+# If setup.sh created symlinks, changes sync automatically - no need to run this.
+#
+# Use this script if:
+# - You chose "Keep Separate" during setup
+# - You want to manually push OpenAgent changes to .config/opencode
+# - Symlinks were removed for some reason
 
 set -e
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Paths
 OPENAGENT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 OPENCODE_CONFIG="$HOME/.config/opencode"
 
-# Dry run flag
-DRY_RUN=false
-DIRECTION="to-opencode"
-
-# Help
-show_help() {
-  echo "OpenAgent OpenCode Sync Script"
-  echo ""
-  echo "Usage: $0 [options] [direction]"
-  echo ""
-  echo "Directions:"
-  echo "  to-opencode   Sync FROM openagent TO ~/.config/opencode (default)"
-  echo "  to-openagent  Sync FROM ~/.config/opencode TO openagent"
-  echo ""
-  echo "Options:"
-  echo "  --dry-run    Show what would be synced without making changes"
-  echo "  --agents      Sync agents only"
-  echo "  --commands    Sync commands only"
-  echo "  --plugins     Sync plugins only"
-  echo ""
-  echo "Examples:"
-  echo "  $0                          # Sync all to opencode"
-  echo "  $0 --dry-run               # Preview sync"
-  echo "  $0 to-openagent --agents    # Sync agents to openagent"
-}
-
-# Parse arguments
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --dry-run)
-      DRY_RUN=true
-      shift
-      ;;
-    --agents)
-      SYNC_AGENTS=true
-      shift
-      ;;
-    --commands)
-      SYNC_COMMANDS=true
-      shift
-      ;;
-    --plugins)
-      SYNC_PLUGINS=true
-      shift
-      ;;
-    --skills)
-      SYNC_SKILLS=true
-      shift
-      ;;
-    to-opencode|to-openagent)
-      DIRECTION="$1"
-      shift
-      ;;
-    --help|-h)
-      show_help
-      exit 0
-      ;;
-    *)
-      echo -e "${RED}Unknown option: $1${NC}"
-      show_help
-      exit 1
-      ;;
-  esac
-done
-
-# If no specific type selected, sync all
-if [[ -z "$SYNC_AGENTS" && -z "$SYNC_COMMANDS" && -z "$SYNC_PLUGINS" && -z "$SYNC_SKILLS" ]]; then
-  SYNC_AGENTS=true
-  SYNC_COMMANDS=true
-  SYNC_PLUGINS=true
-  SYNC_SKILLS=true
+# Check if using symlinks
+if [ -L "$OPENCODE_CONFIG/agents" ]; then
+  echo "⚠️  You're using symlinks - changes sync automatically."
+  echo "   No need to run this script."
+  exit 0
 fi
 
-# Set source and target based on direction
-if [[ "$DIRECTION" == "to-opencode" ]]; then
-  AGENTS_SRC="$OPENAGENT_ROOT/system/agents"
-  AGENTS_DST="$OPENCODE_CONFIG/agent"
-  COMMANDS_SRC="$OPENAGENT_ROOT/system/opencode/commands"
-  COMMANDS_DST="$OPENCODE_CONFIG/command"
-  PLUGINS_SRC="$OPENAGENT_ROOT/system/opencode/plugins"
-  PLUGINS_DST="$OPENCODE_CONFIG/plugin"
-  SKILLS_SRC="$OPENAGENT_ROOT/system/skills"
-  SKILLS_DST="$OPENCODE_CONFIG/skill"  # Note: OpenCode uses singular 'skill'
-  DIRECTION_DESC="openagent → ~/.config/opencode"
-else
-  AGENTS_SRC="$OPENCODE_CONFIG/agent"
-  AGENTS_DST="$OPENAGENT_ROOT/system/agents"
-  COMMANDS_SRC="$OPENCODE_CONFIG/command"
-  COMMANDS_DST="$OPENAGENT_ROOT/system/opencode/commands"
-  PLUGINS_SRC="$OPENCODE_CONFIG/plugin"
-  PLUGINS_DST="$OPENAGENT_ROOT/system/opencode/plugins"
-  SKILLS_SRC="$OPENCODE_CONFIG/skill"
-  SKILLS_DST="$OPENAGENT_ROOT/system/skills"
-  DIRECTION_DESC="~/.config/opencode → openagent"
-fi
+echo "Syncing: openagent → ~/.config/opencode"
 
-# Log function
-log() {
-  local level="$1"
-  shift
-  local msg="$*"
-  local color
-
-  case "$level" in
-    INFO) color="$BLUE" ;;
-    SUCCESS) color="$GREEN" ;;
-    WARN) color="$YELLOW" ;;
-    ERROR) color="$RED" ;;
-  esac
-
-  echo -e "${color}[$level]${NC} $msg"
-}
-
-# Sync function
-sync_dir() {
-  local src="$1"
-  local dst="$2"
-  local name="$3"
-
-  if [[ ! -d "$src" ]]; then
-    log WARN "Skipping $name: source directory not found: $src"
-    return
-  fi
-
-  log INFO "Syncing $name: $DIRECTION_DESC"
-
-  if [[ "$DRY_RUN" == true ]]; then
-    echo "Would sync: $src → $dst"
-    return
-  fi
-
-  # Create destination if needed
-  mkdir -p "$dst"
-
-  # Copy files
-  if [[ "$name" == "agents" ]]; then
-    # Agents are flat - copy all *.md files
-    find "$src" -name "*.md" -exec cp {} "$dst/" \;
-  else
-    # Regular sync
-    rsync -av "$src/" "$dst/"
-  fi
-
-  log SUCCESS "Synced $name"
-}
+# Create dirs if needed (use plural as per OpenCode docs)
+mkdir -p "$OPENCODE_CONFIG/agents"
+mkdir -p "$OPENCODE_CONFIG/commands"
+mkdir -p "$OPENCODE_CONFIG/plugins"
+mkdir -p "$OPENCODE_CONFIG/skills"
 
 # Sync agents
-if [[ "$SYNC_AGENTS" == true ]]; then
-  sync_dir "$AGENTS_SRC" "$AGENTS_DST" "agents"
+if [ -d "$OPENAGENT_ROOT/system/agents" ]; then
+  cp "$OPENAGENT_ROOT/system/agents"/*.md "$OPENCODE_CONFIG/agents/" 2>/dev/null || true
+  echo "✓ Synced agents"
 fi
 
 # Sync commands
-if [[ "$SYNC_COMMANDS" == true ]]; then
-  sync_dir "$COMMANDS_SRC" "$COMMANDS_DST" "commands"
+if [ -d "$OPENAGENT_ROOT/system/opencode/commands" ]; then
+  cp "$OPENAGENT_ROOT/system/opencode/commands"/*.md "$OPENCODE_CONFIG/commands/" 2>/dev/null || true
+  echo "✓ Synced commands"
 fi
 
-# Sync plugins
-if [[ "$SYNC_PLUGINS" == true ]]; then
-  sync_dir "$PLUGINS_SRC" "$PLUGINS_DST" "plugins"
+# Sync plugins (if any)
+if [ -d "$OPENAGENT_ROOT/system/opencode/plugins" ] && [ "$(ls -A "$OPENAGENT_ROOT/system/opencode/plugins" 2>/dev/null)" ]; then
+  cp -r "$OPENAGENT_ROOT/system/opencode/plugins"/* "$OPENCODE_CONFIG/plugins/" 2>/dev/null || true
+  echo "✓ Synced plugins"
 fi
 
 # Sync skills
-if [[ "$SYNC_SKILLS" == true ]]; then
-  sync_dir "$SKILLS_SRC" "$SKILLS_DST" "skills"
+if [ -d "$OPENAGENT_ROOT/system/skills" ] && [ "$(ls -A "$OPENAGENT_ROOT/system/skills" 2>/dev/null)" ]; then
+  cp -r "$OPENAGENT_ROOT/system/skills"/* "$OPENCODE_CONFIG/skills/" 2>/dev/null || true
+  echo "✓ Synced skills"
 fi
 
-# Summary
-if [[ "$DRY_RUN" == true ]]; then
-  log INFO "Dry run complete. No changes made."
-else
-  log SUCCESS "Sync complete: $DIRECTION_DESC"
-  log INFO "OpenCode will need to be restarted to reload agents/commands"
-fi
+echo ""
+echo "✓ Sync complete. Restart OpenCode to see changes."

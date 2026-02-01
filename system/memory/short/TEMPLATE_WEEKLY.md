@@ -1,6 +1,6 @@
-# DD.MM - DD.MM.YYYY (Week NN)
+# DD.MM.YYYY - DD.MM.YYYY (Week NN)
 
-**Format**: Monday date - Sunday date (MM.DD - MM.DD.YYYY)
+**Format**: Monday date - Sunday date (DD.MM.YYYY - DD.MM.YYYY)
 
 ## YYYY-MM-DD (Monday)
 (empty - add content here)

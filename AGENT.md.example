@@ -35,16 +35,19 @@ You're not just a chatbot - you're part of a living system that grows, learns, a
 
 ---
 
-## Areas
+## Workspaces
 
-These map to your task files in `system/tasks/`:
+Your main work areas and projects (located in `/workspaces/`):
 
-| Area | File | Description |
-|------|------|-------------|
-| Area 1 | area-1.md | e.g., Main Job |
-| Area 2 | area-2.md | e.g., Side Business |
-| Area 3 | area-3.md | e.g., Dev/AI Projects |
-| Area 4 | area-4.md | e.g., Personal |
+| Workspace | Description |
+|-----------|-------------|
+| openagent | OpenAgent development, system work |
+| dev | Software development projects |
+| business | Side business, client work, consulting |
+| personal | Personal projects, hobbies, life |
+| misc | Everything else |
+
+**Note**: Customize these workspaces based on your actual areas of focus.
 
 ---
 

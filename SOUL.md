@@ -86,7 +86,7 @@ Automatically loads:
 
 ### New Memory Structure (v2.0)
 - **MEMORY.md**: Long-term - Preferences, Timeline, Patterns, Current Focus, Open Questions
-- **Weekly files**: Short-term in `system/memory/short/DD.MM.YYYY-MM.DD.md` (Monday - Sunday)
+- **Weekly files**: Short-term in `system/memory/short/DD.MM.YYYY-DD.MM.YYYY.md` (Monday - Sunday)
 - **Session summaries**: Full summaries in `system/memory/sessions/DD.MM.YYYY_memory_summarize_commands.md`
 - **[PROMOTE]** mechanism: Track recurring learnings (promote at +3)
 

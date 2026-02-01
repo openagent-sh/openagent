@@ -1,88 +1,195 @@
 #!/bin/bash
 
 # OpenAgent Setup Script
-# Run this after cloning to personalize your instance
+# Sets up OpenCode integration with symlinks
 
-echo "OpenAgent Setup"
-echo "==============="
+set -e
+
+echo "╔════════════════════════════════════════╗"
+echo "║      OpenAgent Setup                   ║"
+echo "╚════════════════════════════════════════╝"
 echo ""
 
 OPENAGENT_ROOT="$(pwd)"
+OPENCODE_CONFIG="$HOME/.config/opencode"
 
-# Check if opencode is installed
+# Check if OpenCode is installed
 if ! command -v opencode &> /dev/null; then
-    echo "OpenCode is not installed."
-    echo "Install it first: https://opencode.ai"
+    echo "❌ OpenCode is not installed."
     echo ""
+    echo "Install it first: https://opencode.ai"
     echo "Then run this script again."
     exit 1
 fi
 
-echo "OpenCode detected."
+echo "✓ OpenCode detected"
 echo ""
 
-# OpenCode Integration
-echo "OpenCode Integration"
-echo ""
+# Check for existing OpenCode configuration
+HAS_AGENTS=false
+HAS_COMMANDS=false
+HAS_SKILLS=false
+HAS_PLUGINS=false
 
-OPENCODE_CONFIG="$HOME/.config/opencode"
-OPENAGENT_AGENTS="$OPENAGENT_ROOT/system/agents"
-OPENAGENT_COMMANDS="$OPENAGENT_ROOT/system/opencode/commands"
+[[ -d "$OPENCODE_CONFIG/agents" || -d "$OPENCODE_CONFIG/agent" ]] && HAS_AGENTS=true
+[[ -d "$OPENCODE_CONFIG/commands" || -d "$OPENCODE_CONFIG/command" ]] && HAS_COMMANDS=true
+[[ -d "$OPENCODE_CONFIG/skills" || -d "$OPENCODE_CONFIG/skill" ]] && HAS_SKILLS=true
+[[ -d "$OPENCODE_CONFIG/plugins" || -d "$OPENCODE_CONFIG/plugin" ]] && HAS_PLUGINS=true
 
-# Check if user has existing OpenCode config
-if [ -d "$OPENCODE_CONFIG/agent" ] || [ -d "$OPENCODE_CONFIG/command" ]; then
-    echo "Existing OpenCode config detected at $OPENCODE_CONFIG"
+if [[ "$HAS_AGENTS" == true ]] || [[ "$HAS_COMMANDS" == true ]]; then
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "Existing OpenCode Configuration Detected"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
-    echo "You have two options:"
+    echo "You have existing agents/commands in: $OPENCODE_CONFIG"
     echo ""
-    echo "  Option A: Merge (recommended for existing users)"
-    echo "  Copy OpenAgent agents/commands into your existing config:"
-    echo "  cp -r $OPENAGENT_AGENTS/* $OPENCODE_CONFIG/agent/"
-    echo "  cp -r $OPENAGENT_COMMANDS/* $OPENCODE_CONFIG/command/"
+    echo "To integrate OpenAgent, choose an option:"
     echo ""
-    echo "  Option B: Replace (fresh start)"
-    echo "  Backup your config and symlink OpenAgent's:"
-    echo "  mv $OPENCODE_CONFIG/agent $OPENCODE_CONFIG/agent.backup"
-    echo "  mv $OPENCODE_CONFIG/command $OPENCODE_CONFIG/command.backup"
-    echo "  ln -s $OPENAGENT_AGENTS $OPENCODE_CONFIG/agent"
-    echo "  ln -s $OPENAGENT_COMMANDS $OPENCODE_CONFIG/command"
+    echo "  [1] Merge & Symlink (Recommended)"
+    echo "      • Move your existing files into OpenAgent"
+    echo "      • Then symlink directories for automatic sync"
+    echo "      • OpenAgent becomes your single source of truth"
     echo ""
-    echo "Skipping automatic symlinks to preserve your existing config."
+    echo "  [2] Keep Separate"
+    echo "      • Keep your existing setup as-is"
+    echo "      • We'll add OpenAgent files alongside yours"
+    echo "      • No automatic sync (manual management)"
+    echo ""
+    echo -n "Your choice [1/2]: "
+    read -r CHOICE
+    echo ""
+    
+    if [[ "$CHOICE" == "1" ]]; then
+        echo "Moving existing files to OpenAgent..."
+        
+        # Move agents
+        if [[ -d "$OPENCODE_CONFIG/agents" ]] || [[ -d "$OPENCODE_CONFIG/agent" ]]; then
+            AGENT_DIR="${OPENCODE_CONFIG}/agents"
+            [[ -d "$OPENCODE_CONFIG/agent" ]] && AGENT_DIR="${OPENCODE_CONFIG}/agent"
+            
+            if [ "$(ls -A "$AGENT_DIR" 2>/dev/null)" ]; then
+                cp "$AGENT_DIR"/*.md "$OPENAGENT_ROOT/system/agents/" 2>/dev/null || true
+                echo "  ✓ Moved agents"
+            fi
+            rm -rf "$AGENT_DIR"
+        fi
+        
+        # Move commands
+        if [[ -d "$OPENCODE_CONFIG/commands" ]] || [[ -d "$OPENCODE_CONFIG/command" ]]; then
+            COMMAND_DIR="${OPENCODE_CONFIG}/commands"
+            [[ -d "$OPENCODE_CONFIG/command" ]] && COMMAND_DIR="${OPENCODE_CONFIG}/command"
+            
+            if [ "$(ls -A "$COMMAND_DIR" 2>/dev/null)" ]; then
+                cp "$COMMAND_DIR"/*.md "$OPENAGENT_ROOT/system/opencode/commands/" 2>/dev/null || true
+                echo "  ✓ Moved commands"
+            fi
+            rm -rf "$COMMAND_DIR"
+        fi
+        
+        # Move skills
+        if [[ -d "$OPENCODE_CONFIG/skills" ]] || [[ -d "$OPENCODE_CONFIG/skill" ]]; then
+            SKILL_DIR="${OPENCODE_CONFIG}/skills"
+            [[ -d "$OPENCODE_CONFIG/skill" ]] && SKILL_DIR="${OPENCODE_CONFIG}/skill"
+            
+            if [ "$(ls -A "$SKILL_DIR" 2>/dev/null)" ]; then
+                cp -r "$SKILL_DIR"/* "$OPENAGENT_ROOT/system/skills/" 2>/dev/null || true
+                echo "  ✓ Moved skills"
+            fi
+            rm -rf "$SKILL_DIR"
+        fi
+        
+        # Move plugins
+        if [[ -d "$OPENCODE_CONFIG/plugins" ]] || [[ -d "$OPENCODE_CONFIG/plugin" ]]; then
+            PLUGIN_DIR="${OPENCODE_CONFIG}/plugins"
+            [[ -d "$OPENCODE_CONFIG/plugin" ]] && PLUGIN_DIR="${OPENCODE_CONFIG}/plugin"
+            
+            mkdir -p "$OPENAGENT_ROOT/system/opencode/plugins"
+            if [ "$(ls -A "$PLUGIN_DIR" 2>/dev/null)" ]; then
+                cp -r "$PLUGIN_DIR"/* "$OPENAGENT_ROOT/system/opencode/plugins/" 2>/dev/null || true
+                echo "  ✓ Moved plugins"
+            fi
+            rm -rf "$PLUGIN_DIR"
+        fi
+        
+        echo ""
+        echo "Now creating symlinks..."
+        
+        # Create symlinks (plural directories)
+        ln -s "$OPENAGENT_ROOT/system/agents" "$OPENCODE_CONFIG/agents"
+        ln -s "$OPENAGENT_ROOT/system/opencode/commands" "$OPENCODE_CONFIG/commands"
+        ln -s "$OPENAGENT_ROOT/system/skills" "$OPENCODE_CONFIG/skills"
+        ln -s "$OPENAGENT_ROOT/system/opencode/plugins" "$OPENCODE_CONFIG/plugins"
+        
+        echo "  ✓ Symlinked agents"
+        echo "  ✓ Symlinked commands"
+        echo "  ✓ Symlinked skills"
+        echo "  ✓ Symlinked plugins"
+        echo ""
+        echo "✓ Merge complete! All files now in OpenAgent with automatic sync."
+        
+    else
+        echo "Adding OpenAgent files to your existing config..."
+        
+        # Copy OpenAgent files to existing config (plural directories preferred)
+        mkdir -p "$OPENCODE_CONFIG/agents"
+        mkdir -p "$OPENCODE_CONFIG/commands"
+        
+        cp "$OPENAGENT_ROOT/system/agents"/*.md "$OPENCODE_CONFIG/agents/" 2>/dev/null || true
+        cp "$OPENAGENT_ROOT/system/opencode/commands"/*.md "$OPENCODE_CONFIG/commands/" 2>/dev/null || true
+        
+        echo "  ✓ Copied agents"
+        echo "  ✓ Copied commands"
+        echo ""
+        echo "✓ Files copied. Changes in OpenAgent won't auto-sync."
+        echo "  To sync later, manually copy files between directories."
+    fi
+    
 else
-    # No existing config, safe to symlink
+    # Clean install - no existing config
+    echo "No existing OpenCode config found."
+    echo "Creating symlinks for automatic sync..."
+    echo ""
+    
     mkdir -p "$OPENCODE_CONFIG"
-
-    ln -s "$OPENAGENT_AGENTS" "$OPENCODE_CONFIG/agent"
-    echo "Linked agents -> $OPENCODE_CONFIG/agent"
-
-    ln -s "$OPENAGENT_COMMANDS" "$OPENCODE_CONFIG/command"
-    echo "Linked commands -> $OPENCODE_CONFIG/command"
+    
+    # Create symlinks (plural directories)
+    ln -s "$OPENAGENT_ROOT/system/agents" "$OPENCODE_CONFIG/agents"
+    ln -s "$OPENAGENT_ROOT/system/opencode/commands" "$OPENCODE_CONFIG/commands"
+    ln -s "$OPENAGENT_ROOT/system/skills" "$OPENCODE_CONFIG/skills"
+    ln -s "$OPENAGENT_ROOT/system/opencode/plugins" "$OPENCODE_CONFIG/plugins"
+    
+    echo "✓ Symlinked: agents"
+    echo "✓ Symlinked: commands"
+    echo "✓ Symlinked: skills"
+    echo "✓ Symlinked: plugins"
 fi
 
 echo ""
-echo "Shell Alias"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Shell Alias (Optional)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "Add this to your ~/.zshrc (or ~/.bashrc):"
+echo "Add this to your ~/.zshrc or ~/.bashrc to launch OpenAgent from anywhere:"
 echo ""
 echo "  alias openagent=\"cd $OPENAGENT_ROOT && opencode --agent openagent --prompt Hello\""
 echo ""
-echo "NOTE: If you get an API error, add --model flag:"
-echo "  alias openagent=\"cd $OPENAGENT_ROOT && opencode --agent openagent --model YOUR_PROVIDER/MODEL --prompt Hello\""
-echo ""
-echo "Examples: --model anthropic/claude-sonnet-4-5 or --model openai/gpt-4o"
+echo "If you get API errors, add --model flag:"
+echo "  alias openagent=\"cd $OPENAGENT_ROOT && opencode --agent openagent --model anthropic/claude-sonnet-4-5 --prompt Hello\""
 echo ""
 
-echo "Next steps:"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Next Steps"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "  1. Add the alias above to your shell config"
+echo "  1. (Optional) Add the alias above to your shell config"
 echo ""
-echo "  2. Run: source ~/.zshrc"
-echo ""
-echo "  3. Run onboarding to personalize your system:"
+echo "  2. Run OpenCode:"
 echo "     opencode"
-echo "     Then type: /onboarding"
 echo ""
-echo "  4. Or just start using OpenAgent:"
-echo "     openagent"
+echo "  3. Start the onboarding to personalize your system:"
+echo "     /onboarding"
 echo ""
-echo "Setup complete!"
+echo "  4. Or jump straight to OpenAgent:"
+echo "     /openagent"
+echo ""
+echo "✓ Setup complete!"

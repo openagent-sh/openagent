@@ -103,8 +103,7 @@ When a task needs detailed project context, it should be moved to `/workspaces/b
 
 ## Related Systems
 
-- **/workspaces/** - Detailed project context
-- **/system/tasks/*** - Main prioritization system (work.md, sidebusiness.md, etc.)
+- **/workspaces/** - Detailed project context (openagent, dev, business, personal, misc)
 - **/capture** - Intelligent task capture command
 
 ---

@@ -77,7 +77,7 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 │  developer-1     │  │  frontend-design │  │  business/       │
 │  developer-2     │  │  skill-creator   │  │  personal/       │
 │  frontend-design │  │                  │  │  misc/           │
-│  memory-agent    │  │                  │  │                  │
+│  code-reviewer   │  │                  │  │                  │
 │  opencode-agent  │  │                  │  │                  │
 └──────────────────┘  └──────────────────┘  └──────────────────┘
                                │
@@ -102,22 +102,22 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 
 ## Onboarding
 
-New to OpenAgent? Run `/onboarding` to get set up in 5-10 minutes.
+New to OpenAgent? After setup, run `/onboarding` to personalize your system (takes 5 minutes).
 
-The onboarding flow will:
-- Collect your name (optional)
-- Understand your current projects and work areas
-- Set up workspaces (dev, business, personal, misc)
-- Configure your preferences and communication style
-- Enable the agents and commands you want to use
-- Add shell integration (optional)
-- Capture this week's focus
+The onboarding flow will ask about:
+- Your name (optional)
+- Current projects and work areas
+- Workspaces to create (dev, business, personal, etc.)
+- Preferences and communication style
+- This week's focus
 
 After onboarding, you'll have:
 - ✅ Personalized `AGENT.md` with your context
 - ✅ Workspaces set up for your areas
+- ✅ Long-term memory initialized
 - ✅ This week's focus ready to go
-- ✅ Commands enabled and ready to use
+
+**Note:** Technical setup (symlinks, agents, commands) is handled by `setup.sh` before onboarding.
 
 [See full onboarding flow](system/agents/onboarding-agent.md)
 
@@ -131,24 +131,42 @@ After onboarding, you'll have:
 
 ### Installation
 
+**One-line install (recommended):**
+
 ```bash
-# 1. Clone the repo
+curl -fsSL https://open-agent.sh/install | bash
+```
+
+This will:
+- Download OpenAgent to `~/openagent`
+- Run interactive setup
+- Create symlinks to OpenCode config
+
+**Manual install (for contributors):**
+
+```bash
+# Clone the repo
 git clone https://github.com/openagent-sh/openagent
 cd openagent
 
-# 2. Run setup
+# Run setup
 ./system/scripts/setup.sh
+```
 
-# 3. Fill in your context
-# Edit AGENT.md with your personal information
+### After Installation
 
-# 4. Start OpenCode
+```bash
+# 1. (Optional) Add shell alias to your ~/.zshrc or ~/.bashrc
+# Copy the command shown by setup, for example:
+alias openagent="cd ~/openagent && opencode --agent openagent --prompt Hello"
+
+# 2. Start OpenCode
 opencode
 
-# 5. Start the onboarding
+# 3. Personalize your system
 /onboarding
 
-# 6. Then run OpenAgent
+# 4. Start using OpenAgent
 /openagent
 ```
 
@@ -165,6 +183,28 @@ opencode
 /summarize 
 ```
 
+### Two Ways to Launch OpenAgent
+
+**1. Shell Alias (Recommended)** - Launch from anywhere
+```bash
+# Add to your ~/.zshrc (setup.sh prompts for this)
+alias openagent="cd /path/to/openagent && opencode --agent openagent --prompt Hello"
+
+# Then from any directory:
+openagent
+```
+
+**2. Command in OpenCode** - When already in a session
+```bash
+# First start OpenCode normally
+opencode
+
+# Then load OpenAgent context
+/openagent
+```
+
+Both load the same context (SOUL.md + AGENT.md + Memory + Tasks), just different entry points.
+
 ---
 
 ## Documentation
@@ -173,6 +213,31 @@ opencode
 - [Sessions Template](system/memory/sessions/TEMPLATE.md) — Session summary format
 - [Memory System](system/memory/README.md) — How memory works
 - [Workspaces Guide](workspaces/README.md) — Organizing your work areas
+
+---
+
+## How It Works: Symlinks & Automatic Sync
+
+OpenAgent uses **symlinks** to connect your OpenAgent files with OpenCode's config:
+
+```
+~/.config/opencode/agents/     → ~/openagent/system/agents/
+~/.config/opencode/commands/   → ~/openagent/system/opencode/commands/
+~/.config/opencode/skills/     → ~/openagent/system/skills/
+~/.config/opencode/plugins/    → ~/openagent/system/opencode/plugins/
+```
+
+**This means:**
+- Edit an agent in `system/agents/developer-1-agent.md` → instantly available in OpenCode
+- Changes sync automatically both ways
+- OpenAgent is your single source of truth
+- No manual sync needed
+
+**What if I have existing OpenCode agents?**
+
+Setup.sh handles this with two options:
+1. **Merge & Symlink** (recommended) - Moves your files into OpenAgent, then creates symlinks
+2. **Keep Separate** - Adds OpenAgent files alongside yours (manual sync needed)
 
 ---
 
@@ -214,7 +279,21 @@ No. Start with `/openagent` and the basic commands. Add agents, skills, and work
 
 ### Can I customize the agents?
 
-Absolutely. All agents are in `system/agents/` — edit them, create your own, remove what you don't use. It's your system.
+Absolutely! All agents are in `system/agents/` — edit them, create your own, remove what you don't use.
+
+**Changes sync automatically** via symlinks, so edits are immediately available in OpenCode. It's your system.
+
+### How do I update OpenAgent?
+
+OpenAgent checks for updates automatically when you run `/openagent`. When an update is available, you'll see a notification.
+
+To update:
+```bash
+cd ~/openagent
+./system/scripts/update.sh
+```
+
+Your personal data (AGENT.md, memory, tasks, workspaces) is always preserved during updates.
 
 ---
 

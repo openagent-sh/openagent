@@ -8,7 +8,7 @@ OpenAgent's memory system (v2.0).
 system/memory/
 ├── MEMORY.md                    # Long-term: Preferences, Timeline, Patterns, Focus
 ├── short/
-│   └── DD.MM.YYYY-MM.DD.md      # Weekly files (Monday - Sunday)
+│   └── DD.MM.YYYY-DD.MM.YYYY.md      # Weekly files (Monday - Sunday)
 ├── sessions/
 │   └── DD.MM.YYYY_memory_summarize_commands.md  # Full session summaries
 └── README.md                    # This file
@@ -16,7 +16,7 @@ system/memory/
 
 ## Weekly File Naming
 
-- Format: `DD.MM.YYYY-MM.DD.md` (Monday date - Sunday date)
+- Format: `DD.MM.YYYY-DD.MM.YYYY.md` (Monday date - Sunday date)
 - Example: `27.01.2026-02.02.2026.md` (Monday Jan 27 - Sunday Feb 2, 2026)
 - Content: Day-by-day sections (only fill relevant days)
 

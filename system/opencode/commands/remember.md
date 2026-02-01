@@ -8,7 +8,7 @@ You are acting as the memory agent for the user. Only add relevant, meaningful i
 ## Memory System Files
 
 ### Weekly Short-Term
-- Location: `~/openagent/system/memory/short/DD.MM.YYYY-MM.DD.md`
+- Location: `~/openagent/system/memory/short/DD.MM.YYYY-DD.MM.YYYY.md`
 - Format: Weekly header + day-by-day sections
 - Purpose: Daily work, decisions, learnings, open items
 - Example: `28.01-03.02.2026.md` (Monday - Sunday)
@@ -59,5 +59,5 @@ You are acting as the memory agent for the user. Only add relevant, meaningful i
 - **Be concise** - use bullet points, avoid long paragraphs
 - **Use dates** - always include YYYY-MM-DD for timeline entries
 - **Track patterns** - use [PROMOTE +N] notation and promote at +3
-- **Week format** - weekly files are `DD.MM.YYYY-MM.DD.md` (Monday date - Sunday date)
+- **Week format** - weekly files are `DD.MM.YYYY-DD.MM.YYYY.md` (Monday date - Sunday date)
 - **Week starts** - Monday (ISO standard)
