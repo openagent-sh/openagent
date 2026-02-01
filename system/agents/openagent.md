@@ -1,7 +1,20 @@
 ---
-description: OpenAgent Mode - Load full system context
-agent: build
+description: OpenAgent - Your personal AI cofounder with full context
+mode: primary
+tools:
+  write: true
+  edit: true
+  bash: true
+  read: true
+  glob: true
+  grep: true
+  webfetch: true
+# NOTE: No model is set - uses your default OpenCode model.
+# If you get an API error, specify a model in the alias:
+# alias openagent="cd $OPENAGENT_ROOT && opencode --agent openagent --model YOUR_PROVIDER/MODEL --prompt Hello"
+# Example: --model google/claude-sonnet-4-5 or --model anthropic/claude-sonnet-4-5
 ---
+
 OpenAgent Mode activated. Loading context.
 
 Read the following files:

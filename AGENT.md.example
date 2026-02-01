@@ -84,20 +84,18 @@ These map to your task files in `system/tasks/`:
 ## Key Paths
 
 ```
-OpenAgent:    ~/openagent/          # This repo
-Workspaces:   ~/openagent/workspaces/  # Project workspaces
-Docs:         ~/openagent/docs/  # Dev Documentation, Notes, Research, ..
-Tasks:        ~/openagent/tasks/ # Your tasks sorted by inbox and backlog
-System:       ~/openagent/system/ # Core configuration of your system
-- Agents:       ~/openagent/system/agents/ # Your agents (synced with OpenCode)
-- Memory:       ~/openagent/system/memory/ # Short and long term memory and session summarizations
-- OpenCode:     ~/openagent/system/opencode/ # Commands, Plugins and Config (synced with OpenCode)
-- Scripts:      ~/openagent/system/scripts/ # Custom scripts 
-- Skills:       ~/openagent/system/skills/ # Skills to use alongside agents
-AGENT.md      ~/openagent/AGENT.md              # This file (User Personalization)
-SOUL.md       ~/openagent/SOUL.md               # The core identity of OpenAgent
-
-
+OpenAgent:    ./                        # This repo (run opencode from here)
+Workspaces:   ./workspaces/             # Project workspaces
+Docs:         ./docs/                   # Dev Documentation, Notes, Research
+Tasks:        ./tasks/                  # Your tasks (inbox and backlog)
+System:       ./system/                 # Core configuration of your system
+- Agents:       ./system/agents/        # Your agents (synced with OpenCode)
+- Memory:       ./system/memory/        # Short and long term memory
+- OpenCode:     ./system/opencode/      # Commands, Plugins and Config
+- Scripts:      ./system/scripts/       # Custom scripts 
+- Skills:       ./system/skills/        # Skills to use alongside agents
+AGENT.md      ./AGENT.md                # This file (User Personalization)
+SOUL.md       ./SOUL.md                 # The core identity of OpenAgent
 ```
 
 ---

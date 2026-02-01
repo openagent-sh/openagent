@@ -182,11 +182,6 @@ if [[ "$SYNC_SKILLS" == true ]]; then
   sync_dir "$SKILLS_SRC" "$SKILLS_DST" "skills"
 fi
 
-# Sync skills
-if [[ "$SYNC_SKILLS" == true ]]; then
-  sync_dir "$SKILLS_SRC" "$SKILLS_DST" "skills"
-fi
-
 # Summary
 if [[ "$DRY_RUN" == true ]]; then
   log INFO "Dry run complete. No changes made."
