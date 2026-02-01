@@ -1,9 +1,11 @@
 # OpenAgent - Your Cofounder for Life
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
-[![Built with OpenCode](https://img.shields.io/badge/Built%20with-OpenCode-blue)](https://opencode.ai)
-[![Website](https://img.shields.io/badge/Website-open--agent.sh-green)](https://open-agent.sh)
-[![X](https://img.shields.io/badge/X-%40openagent__-black)](https://x.com/openagent_)
+<p align="center">
+  <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://opencode.ai"><img src="https://img.shields.io/badge/Built%20with-OpenCode-blue" alt="Built with OpenCode"></a>
+  <a href="https://open-agent.sh"><img src="https://img.shields.io/badge/Website-open--agent.sh-green" alt="Website"></a>
+  <a href="https://x.com/openagent_"><img src="https://img.shields.io/badge/X-%40openagent__-black" alt="X"></a>
+</p>
 
 > Your personal AI cofounder for life.
 
@@ -15,9 +17,13 @@ A living AI agent system built on [OpenCode](https://opencode.ai) that makes you
 
 **The problem:** You use Claude Code, ChatGPT, OpenCode and Cursor - your context is scattered across different tools. Every time you start a new conversation, you're starting from zero.
 
-**The solution:** OpenAgent gives you a persistent, personalized AI system that knows who you are, what you're working on, and how you work. It's your base system that you build up from.
+**The solution:** OpenAgent gives you a persistent, personalized AI system that knows who you are, what you're working on, how you work and grows with you. It's your base system that you build up from.
 
-Unlike other frameworks that overwhelm you with thousands of app connections and configuration options, OpenAgent focuses on what matters: getting things done. It's simple, modular and customizable to how you actually work.
+Unlike other tools that overwhelm you with thousands of app connections and configuration options, OpenAgent focuses on what matters: getting things done. It's simple, modular and customizable to how you actually work.
+
+---
+
+![OpenAgent Demo](https://github.com/user-attachments/assets/dd1535eb-fa39-4e96-bf61-6d9e92d1e9a6)
 
 ---
 
@@ -29,10 +35,6 @@ Unlike other frameworks that overwhelm you with thousands of app connections and
 - **Specialized Agents** — Onboarding, code review, frontend design, development — all ready to use
 - **Skills** — Built-in expertise on OpenCode and other tools
 - **Fully Modular** — Customize agents, commands, skills — make it yours
-
----
-
-![OpenAgent Demo](https://github.com/user-attachments/assets/dd1535eb-fa39-4e96-bf61-6d9e92d1e9a6)
 
 ---
 
@@ -205,19 +207,7 @@ After onboarding, you'll have:
 
 ## Contributing
 
-Contributions are welcome! Whether it's bug fixes, new agents, plugins, or feature ideas.
-
-**Before contributing:**
-1. Open an issue to discuss major changes
-2. Keep changes focused and well-documented
-3. Follow the existing code style and structure
-4. Test your changes thoroughly
-
-**Areas that need help:**
-- More specialized agents
-- Better documentation
-- Testing on different platforms
-- Skill packs for popular tools
+All sorts of contributions and requests are welcome <3
 
 ---
 
@@ -234,16 +224,6 @@ It's meant to be **customizable and modular from the ground up**, because everyo
 - Support for other CLIs (claude code, droid, ...)
 - A webapp with an agent orchestration view, dashboard, a clean markdown editor that is built AI native
 - Extensions like Vercel Agent Browser, AI SDK, Exa AI websearch, ...
-
-### Do I need to use all of the features?
-
-No. Start with `/openagent` and the basic commands. Add agents, skills, and workflows as you need them. The system grows with you.
-
-### Can I customize the agents?
-
-Absolutely! All agents are in `system/agents/` — edit them, create your own, remove what you don't use.
-
-**Changes sync automatically** via symlinks, so edits are immediately available in OpenCode. It's your system.
 
 ### How do I update OpenAgent?
 
