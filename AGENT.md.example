@@ -41,13 +41,11 @@ Your main work areas and projects (located in `/workspaces/`):
 
 | Workspace | Description |
 |-----------|-------------|
-| openagent | OpenAgent development, system work |
-| dev | Software development projects |
-| business | Side business, client work, consulting |
-| personal | Personal projects, hobbies, life |
-| misc | Everything else |
+| work | Professional work, main job |
+| hobby | Side projects, learning, personal interests |
+| misc | Everything else that doesn't fit |
 
-**Note**: Customize these workspaces based on your actual areas of focus.
+**Note**: These will be created during `/onboarding` based on your actual areas of focus.
 
 ---
 

@@ -6,16 +6,22 @@ This folder contains workspace-specific documentation and detailed project conte
 
 Workspaces are your "projects" or work areas - where you keep detailed, in-depth project files, notes, and context that goes beyond simple task entries.
 
-## Available Workspaces
+## Example Workspaces
+
+After running `/onboarding`, you'll have workspaces for your areas of focus:
 
 ```
 workspaces/
-├── openagent/    ← OpenAgent development, system work
-├── dev/          ← Software development projects
-├── business/     ← Business/client work
-├── personal/     ← Personal life, hobbies
-└── misc/         ← Everything else
+├── work/         ← Professional work, main job
+├── hobby/        ← Side projects, learning, personal interests
+└── misc/         ← Everything else that doesn't fit
 ```
+
+You can create as many workspaces as you need. Common examples:
+- `dev/` - Software development projects
+- `business/` - Client work, consulting
+- `writing/` - Blog posts, documentation
+- `health/` - Fitness tracking, meal planning
 
 ## Workspace Structure
 
@@ -57,7 +63,7 @@ When `/capture` asks if you want to move to workspace:
 
 ```bash
 [User responds with workspace name]
-→ Move to: workspaces/openagent/
+→ Move to: workspaces/work/
 ```
 
 ### 3. Create Workspace Context
@@ -65,8 +71,8 @@ For detailed project work:
 
 ```bash
 # Create workspace files
-workspaces/openagent/README.md
-workspaces/openagent/NOTES.md
+workspaces/work/README.md
+workspaces/work/NOTES.md
 ```
 
 ### 4. Reference from Tasks
@@ -74,46 +80,13 @@ Task files can reference workspaces:
 
 ```markdown
 ---
-workspace: openagent
+workspace: work
 ---
 
 # Task Title
 
-Related to: /workspaces/openagent/
+Related to: /workspaces/work/
 ```
-
-## Workspace Descriptions
-
-### openagent/
-OpenAgent personal AI operating system development.
-
-- **Type**: Dev / System work
-- **Contents**: Architecture, development, documentation, research
-
-### dev/
-Software development projects.
-
-- **Type**: Development
-- **Contents**: Coding projects, technical work, experiments
-
-### business/
-Business and client work.
-
-- **Type**: Business
-- **Contents**: Client projects, consulting, business tasks
-
-### personal/
-Personal life and hobbies.
-
-- **Type**: Personal
-- **Contents**: Personal projects, hobbies, life management
-
-### misc/
-Everything else that doesn't fit into other workspaces.
-
-- **Type**: Miscellaneous
-- **Contents**: Explorations, experiments, uncategorized ideas
-- **Related**: None (general)
 
 ## Integration with Tasks System
 
@@ -121,9 +94,9 @@ The new `/capture` command creates tasks in `/tasks/` with frontmatter linking t
 
 ```yaml
 ---
-workspace: business
+workspace: work
 importance: high
-tags: [client, followup]
+tags: [project, followup]
 ---
 ```
 

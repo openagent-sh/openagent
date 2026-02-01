@@ -1,4 +1,24 @@
 
+# User-specific configuration
+AGENT.md
+
+# User memory - These are templates in the repo, but changes after setup are ignored
+# To keep the template but ignore local modifications
+# Users: Your changes to these files stay local and won't be committed
+
+# User tasks (exclude all except READMEs and structure)
+tasks/inbox/*.md
+!tasks/inbox/README.md
+!tasks/inbox/.gitkeep
+tasks/backlog/*.md
+!tasks/backlog/README.md
+!tasks/backlog/.gitkeep
+
+# User workspaces (exclude all workspace content except structure)
+workspaces/*/
+!workspaces/*/.gitkeep
+!workspaces/README.md
+
 # Dependencies
 node_modules/
 .bun/
