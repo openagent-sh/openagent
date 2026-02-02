@@ -20,7 +20,7 @@ Collect ALL information by asking the user directly. Ask fresh, even if files ex
 
 ## Your Task
 
-Start the onboarding flow using the `question` tool. Ask questions across 4 pages, collect all answers, then create/update the files listed in the Output section.
+Start the onboarding flow using the `question` tool. Ask questions across 5 pages, collect all answers, then create/update the files listed in the Output section.
 
 **IMPORTANT:** Use the `question` tool for each page. This is a built-in OpenCode tool that presents interactive questions with checkboxes and a free input field.
 
@@ -28,11 +28,40 @@ Start the onboarding flow using the `question` tool. Ask questions across 4 page
 
 ---
 
+## CRITICAL: OpenAgent Installation Path
+
+**BEFORE starting Page 1**, ask the user where OpenAgent should live:
+
+**Question: Installation Path**
+- Question: "Where should OpenAgent live? This is where your AGENT.md, memory, and workspaces will be stored."
+- Header: "Installation Path"
+- Default suggestion in text field: ~/openagent
+- Options:
+  - Use ~/openagent (description: "Recommended default location")
+
+Store this path and use it for ALL file creation throughout onboarding. Also use this path to update the hardcoded paths in:
+- `system/agents/openagent.md`
+- `system/opencode/commands/openagent.md`
+- `~/.config/opencode/agents/openagent.md`
+- `~/.config/opencode/commands/openagent.md`
+
+Replace all instances of `./` with the full path the user provided.
+
+---
+
+## Important: Emphasis on Detail
+
+At the start of Page 1, display this message:
+
+**"The more detail YOU provide in your answers, the better OpenAgent will work for you. Don't just check boxes - use the text field to share your own thoughts and context!"**
+
+---
+
 ## Onboarding Flow
 
 ### Page 1: About You
 
-Ask these 2 questions using the `question` tool:
+Ask these 4 questions using the `question` tool:
 
 **Question 1: Name**
 - Question: "What's your name?"
@@ -40,9 +69,28 @@ Ask these 2 questions using the `question` tool:
 - Options:
   - Skip (description: "You don't need to know")
 
-**Question 2: Main Project/Focus**
-- Question: "What are you currently working on? What's your main project or area of interest?"
-- Header: "Main Project"
+**Question 2: Describe Yourself**
+- Question: "Tell me about yourself - what do you do, what's your story, what are your goals?"
+- Header: "About You"
+- Options:
+  - Skip (description: "I'll share later")
+
+**Question 3: What Do You Expect From Me?**
+- Question: "What do you expect me to be for you?"
+- Header: "Your Expectations"
+- Multiple selections allowed
+- Options:
+  - Cofounder (description: "Help me build and run my business")
+  - Dev assistant (description: "Help with coding and development")
+  - Life organizer (description: "Manage tasks, priorities, and planning")
+  - Task manager (description: "Track and organize my work")
+  - Research partner (description: "Help me learn and explore")
+  - Skip (description: "Not sure yet")
+
+**Question 4: What I'm Working On**
+- Question: "What are you currently working on?"
+- Header: "Current Projects"
+- Multiple selections allowed
 - Options:
   - Building a SaaS (description: "Software as a Service")
   - Dev project (description: "Building apps, tools, or libraries")
@@ -52,19 +100,62 @@ Ask these 2 questions using the `question` tool:
 
 ---
 
-### Page 2: Workspaces & Preferences
+### Page 2: Tech Stack
+
+Ask these 3 questions using the `question` tool:
+
+**Question 1: Languages & Frameworks**
+- Question: "What languages/frameworks do you mainly work with?"
+- Header: "Tech Stack - Languages"
+- Multiple selections allowed
+- Options:
+  - JavaScript (description: "JavaScript")
+  - TypeScript (description: "TypeScript")
+  - Python (description: "Python")
+  - Rust (description: "Rust")
+  - Swift (description: "Swift")
+  - Skip (description: "Other or none")
+
+**Question 2: Frontend/Web Frameworks**
+- Question: "What frontend/web frameworks do you use?"
+- Header: "Tech Stack - Frontend"
+- Multiple selections allowed
+- Options:
+  - Next.js (description: "Next.js")
+  - Astro (description: "Astro")
+  - Svelte (description: "Svelte")
+  - Vue (description: "Vue")
+  - TanStack (description: "TanStack Start/Router")
+  - Skip (description: "Other or none")
+
+**Question 3: Package Manager**
+- Question: "What package manager do you prefer?"
+- Header: "Tech Stack - Package Manager"
+- Multiple selections allowed
+- Options:
+  - npm (description: "npm")
+  - pnpm (description: "pnpm")
+  - bun (description: "bun")
+  - pip (description: "pip")
+  - uv (description: "uv")
+  - Skip (description: "Other or no preference")
+
+---
+
+### Page 3: Workspaces & How We Work
 
 Ask these 3 questions using the `question` tool:
 
 **Question 1: Work Areas / Workspaces**
-- Question: "What are your areas of interest / projects?"
+- Question: "What areas of your life/work do you want to track?"
 - Header: "Work Areas"
 - Multiple selections allowed
 - Options:
-  - Main job / Employment (description: "Your day job")
-  - Side business (description: "Freelance, consulting, products")
-  - Dev projects (description: "Building software, apps, tools")
+  - Work/Employment (description: "Your day job")
+  - Side Projects (description: "Personal projects and side hustles")
+  - Personal/Life (description: "Personal goals, habits, life management")
   - Learning (description: "Courses, new skills, tutorials")
+  - Health/Fitness (description: "Exercise, nutrition, wellness")
   - Writing (description: "Blog, docs, content creation")
   - AI/ML (description: "AI experiments, ML projects")
   - Skip (description: "Set up later")
@@ -74,34 +165,41 @@ Ask these 3 questions using the `question` tool:
 - Header: "Behavior Rules"
 - Multiple selections allowed
 - Options:
-  - Be concise (description: "Short answers, no fluff")
-  - Be thorough (description: "Detailed explanations")
   - Ask before executing (description: "Don't run commands blindly")
   - Question my assumptions (description: "Check if you agree with my approach")
-  - Casual tone (description: "Like chatting with a friend")
-  - Professional tone (description: "Business-like")
+  - Be proactive (description: "Suggest improvements and next steps")
+  - Show me alternatives (description: "Present options before deciding")
+  - Explain your reasoning (description: "Help me understand your approach")
+  - Be concise (description: "Short and to the point")
+  - Be detailed (description: "Thorough explanations")
   - Skip (description: "Use defaults")
 
-**Question 3: Preferences**
-- Question: "What preferences should I know about?"
-- Header: "Preferences"
+**Question 3: Preferences & Boundaries**
+- Question: "How should we work together? What are your preferences and boundaries?"
+- Header: "Preferences & Boundaries"
 - Multiple selections allowed
 - Options:
-  - Dark mode (description: "Prefer dark themes")
-  - TypeScript (description: "Prefer TypeScript over JavaScript")
-  - Python (description: "Primary language preference")
-  - Vim/Neovim (description: "Editor preference")
-  - Mac (description: "macOS user")
-  - Linux (description: "Linux user")
-  - Skip (description: "No special prefs")
+  - Use pnpm instead of npm (description: "Package manager preference")
+  - Ask clarifying questions when unsure (description: "Don't assume, ask")
+  - Never push to git yourself (description: "I handle all git pushes")
+  - Suggest alternatives when there's a better way (description: "Challenge my approach")
+  - Ask before installing packages (description: "Don't install dependencies automatically")
+  - Show your reasoning (description: "Explain why you're doing something")
+  - Skip (description: "No specific preferences for now")
 
 ---
 
-### Page 3: Focus & Boundaries
+### Page 4: Focus & Priorities
 
 Ask these 2 questions using the `question` tool:
 
-**Question 1: This Week's Focus**
+**Question 1: Top Open Tasks/Projects**
+- Question: "What are your top 5 open tasks or projects right now? What's on your plate?"
+- Header: "Current Tasks"
+- Options:
+  - Skip (description: "I'll add these later")
+
+**Question 2: This Week's Focus**
 - Question: "What do you want to get done this week?"
 - Header: "This Week's Focus"
 - Multiple selections allowed
@@ -113,22 +211,9 @@ Ask these 2 questions using the `question` tool:
   - Catch up (description: "Address backlog and open items")
   - Skip (description: "Start fresh")
 
-**Question 2: What I Should NOT Do**
-- Question: "What should I definitely NOT do? Things you want to control yourself."
-- Header: "Boundaries"
-- Multiple selections allowed
-- Options:
-  - Don't create commits (description: "I'll handle git commits myself")
-  - Don't push changes (description: "I'll push to remote myself")
-  - Don't run dev server (description: "I'll start servers manually")
-  - Don't deploy (description: "I'll handle deployments")
-  - Don't send emails (description: "I'll handle email/communication")
-  - Don't access credentials (description: "Keep away from secrets/API keys")
-  - Skip (description: "No specific boundaries for now")
-
 ---
 
-### Page 4: Wrap Up
+### Page 5: Wrap Up
 
 Ask these 2 questions using the `question` tool:
 
@@ -138,33 +223,101 @@ Ask these 2 questions using the `question` tool:
 - Options:
   - Skip (description: "That's everything for now")
 
-**Question 2: Follow-up Questions**
-- Question: "Want me to ask you a few more specific questions based on what you've shared?"
+**Question 2: Dive Deeper**
+- Question: "Want me to ask you more questions to understand you better?"
 - Header: "More Questions"
 - Options:
-  - Yes (description: "I'd like to dive deeper")
+  - Yes (description: "Let's dive deeper")
   - No (description: "That's good for now")
 
-If user selects "Yes", ask 1-2 targeted follow-up questions based on their answers (e.g., if they said "SaaS", ask about tech stack or target market). After follow-ups, confirm and proceed to Output section.
+If user selects "Yes":
+1. Ask 2-3 targeted follow-up questions based on their answers (e.g., if they said "SaaS", ask about tech stack or target market)
+2. After each round of follow-ups, ALWAYS ask: "Want me to ask more questions to understand you better?" with same Yes/No options
+3. Keep looping until user selects "No"
+4. Then proceed to Summary & Confirmation section
+
+---
+
+## Summary & Confirmation
+
+After all questions are complete (including the dive deeper loop), display a summary of what will be configured:
+
+```
+Here's what I'll set up for you:
+
+**Your Profile:**
+- Name: [name or "Not provided"]
+- About: [summary of their description]
+- Working on: [their projects]
+- Expect me to be: [their expectations]
+
+**Workspaces:**
+[List the work areas they selected]
+
+**Preferences & Boundaries:**
+[List their selected preferences and boundaries]
+
+**This Week's Focus:**
+[List their focus items]
+
+**Open Tasks:**
+[List their top 5 tasks if provided]
+
+---
+
+I'll create:
+- AGENT.md with your personal context
+- MEMORY.md with your preferences and boundaries
+- Workspace folders for your areas
+- This week's focus file
+
+Sound good?
+```
+
+Ask for confirmation with options:
+- Yes, let's go (description: "Create my OpenAgent setup")
+- Let me adjust something (description: "I want to change an answer")
+
+If "Let me adjust something", ask what they want to change, update the relevant info, show summary again, and re-confirm.
+
+Once confirmed, proceed to Output section.
 
 ---
 
 ## Output
 
-After collecting all answers from all pages, create/update these files:
-(These are rough templates - add Info based on what the user shared with you)
+After user confirms the summary, create/update these files using the **installation path they provided at the start**.
+
+All files go in: `[USER_PROVIDED_PATH]/` (e.g., `~/openagent/`)
+
+### Update System Prompts with Installation Path
+
+**BEFORE creating user files**, update these files to replace `./` with the full installation path:
+
+1. `[INSTALL_PATH]/system/agents/openagent.md` - Replace all `./` references with full path
+2. `[INSTALL_PATH]/system/opencode/commands/openagent.md` - Replace all `./` references with full path
+3. `~/.config/opencode/agents/openagent.md` - Replace all `./` references with full path (if exists)
+4. `~/.config/opencode/commands/openagent.md` - Replace all `./` references with full path (if exists)
+
+Example: `@./SOUL.md` becomes `@/Users/username/openagent/SOUL.md`
 
 ### AGENT.md
 
+Create at: `[INSTALL_PATH]/AGENT.md`
+
 Fill in template with collected info:
 - Name
-- Main project (Current Focus)
+- About (their self-description)
+- Current projects (what they're working on)
+- Expectations (what they expect you to be)
 - Work areas (become workspaces)
-- Behavior rules & preferences
-- Boundaries (what AI should NOT do)
+- Behavior rules, preferences & boundaries
+- Top 5 tasks (if provided)
 - Anything else
 
 ### Long-term Memory (MEMORY.md)
+
+Create at: `[INSTALL_PATH]/system/memory/MEMORY.md`
 
 Initialize long-term memory with this structure, adding their preferences from onboarding:
 
@@ -218,17 +371,31 @@ Unresolved topics and pending decisions.
 
 ### Workspaces
 
-Based on their work areas, create workspace folders:
-- `workspaces/[area]/` for each selected area
-- Add README.md to each with a quick description
+Create at: `[INSTALL_PATH]/workspaces/[area]/`
+
+Based on their work areas, create workspace folders - but ONLY if the user provided meaningful detail about that area (either in selections or text input).
+
+For each workspace:
+- Create folder: `workspaces/[area]/`
+- Add comprehensive README.md with:
+  - Overview of this area
+  - Current goals/focus (if they mentioned any)
+  - Current status (based on what they shared)
+  - Next steps or priorities
+  - Any relevant context from their answers
+
+Don't create generic 3-line READMEs. Make them useful with the context they provided.
 
 ### Short-term Memory
+
+Create at: `[INSTALL_PATH]/system/memory/short/[DATE_RANGE].md`
 
 Initialize this week's focus file:
 - Create file in `system/memory/short/` with current week's date range
 - Filename format: `DD.MM.YYYY-DD.MM.YYYY.md` (Monday date - Sunday date)
 - Use `system/memory/short/TEMPLATE_WEEKLY.md` as template
 - Add their "this week" tasks
+- Add their top 5 open tasks/projects (if provided)
 - Add note: "Just onboarded to OpenAgent"
 
 ---

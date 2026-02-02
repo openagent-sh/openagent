@@ -43,23 +43,15 @@ if [[ "$HAS_AGENTS" == true ]] || [[ "$HAS_COMMANDS" == true ]]; then
     echo ""
     echo "You have existing agents/commands in: $OPENCODE_CONFIG"
     echo ""
-    echo "To integrate OpenAgent, choose an option:"
-    echo ""
-    echo "  [1] Merge & Symlink (Recommended)"
-    echo "      • Move your existing files into OpenAgent"
-    echo "      • Then symlink directories for automatic sync"
-    echo "      • OpenAgent becomes your single source of truth"
-    echo ""
-    echo "  [2] Keep Separate"
-    echo "      • Keep your existing setup as-is"
-    echo "      • We'll add OpenAgent files alongside yours"
-    echo "      • No automatic sync (manual management)"
-    echo ""
-    echo -n "Your choice [1/2]: "
-    read -r CHOICE
+    echo "Merging your existing files into OpenAgent and symlinking for auto-sync..."
     echo ""
     
-    if [[ "$CHOICE" == "1" ]]; then
+    # NOTE: We always merge & symlink for the best experience.
+    # If you need to keep configs separate, you can manually copy files instead:
+    # cp -r system/agents/*.md ~/.config/opencode/agents/
+    # cp -r system/opencode/commands/*.md ~/.config/opencode/commands/
+    
+    if true; then
         echo "Moving existing files to OpenAgent..."
         
         # Move agents
@@ -127,21 +119,6 @@ if [[ "$HAS_AGENTS" == true ]] || [[ "$HAS_COMMANDS" == true ]]; then
         echo ""
         echo "✓ Merge complete! All files now in OpenAgent with automatic sync."
         
-    else
-        echo "Adding OpenAgent files to your existing config..."
-        
-        # Copy OpenAgent files to existing config (plural directories preferred)
-        mkdir -p "$OPENCODE_CONFIG/agents"
-        mkdir -p "$OPENCODE_CONFIG/commands"
-        
-        cp "$OPENAGENT_ROOT/system/agents"/*.md "$OPENCODE_CONFIG/agents/" 2>/dev/null || true
-        cp "$OPENAGENT_ROOT/system/opencode/commands"/*.md "$OPENCODE_CONFIG/commands/" 2>/dev/null || true
-        
-        echo "  ✓ Copied agents"
-        echo "  ✓ Copied commands"
-        echo ""
-        echo "✓ Files copied. Changes in OpenAgent won't auto-sync."
-        echo "  To sync later, manually copy files between directories."
     fi
     
 else
