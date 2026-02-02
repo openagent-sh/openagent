@@ -19,7 +19,7 @@ if [ ! -d ".git" ]; then
     echo ""
     echo "If you installed via curl | bash, this should work."
     echo "If you're missing .git, reinstall:"
-    echo "  curl -fsSL https://open-agent.sh/install | bash"
+    echo "  cd ~ && curl -fsSL https://open-agent.sh/install | bash"
     exit 1
 fi
 

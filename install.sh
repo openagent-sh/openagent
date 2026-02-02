@@ -68,6 +68,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "Installation Complete!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
+cd ~
 echo "Next steps:"
 echo "  1. (Optional) Add the shell alias shown above"
 echo "  2. Run: opencode"

@@ -20,7 +20,7 @@ A living AI agent system built on [OpenCode](https://opencode.ai) that makes you
 - **Persistent Memory** — Short-term (weekly focus) and long-term (preferences, patterns, decisions) that grows with you
 - **Workspaces** — Your work areas (dev projects, business, personal) with dedicated context
 - **Smart Commands** — `/capture` for quick ideas, `/remember` for important notes, `/summarize` for session documentation
-- **Specialized Agents** — Onboarding, code review, frontend design, development — all ready to use
+- **Specialized Agents** — 10+ specialized agents (development, frontend design, research, code review, onboarding) — all ready to use
 - **Skills** — Built-in expertise on OpenCode and other tools
 - **Fully Modular** — Customize agents, commands, skills — make it yours
 
@@ -51,7 +51,7 @@ Unlike other tools that overwhelm you with thousands of app connections and conf
 **One-line install (recommended):**
 
 ```bash
-curl -fsSL https://open-agent.sh/install | bash
+cd ~ && curl -fsSL https://open-agent.sh/install | bash
 ```
 
 This will:
@@ -63,7 +63,7 @@ This will:
 
 ```bash
 # Clone the repo
-git clone https://github.com/openagent-sh/openagent
+cd ~ && git clone https://github.com/openagent-sh/openagent
 cd openagent
 
 # Run setup
@@ -169,29 +169,39 @@ After onboarding, you'll have:
 ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
 │     Agents       │  │     Skills       │  │   Workspaces     │
 │                  │  │                  │  │                  │
-│  onboarding      │  │  opencode-skill  │  │  dev/            │
-│  developer-1     │  │  frontend-design │  │  business/       │
-│  developer-2     │  │  skill-creator   │  │  personal/       │
-│  frontend-design │  │                  │  │  misc/           │
+│  openagent       │  │  opencode-skill  │  │  dev/            │
+│  onboarding      │  │  frontend-design │  │  business/       │
+│  capture-agent   │  │  skill-creator   │  │  personal/       │
+│  developer-1     │  │  agent-browser   │  │  misc/           │
+│  developer-2     │  │                  │  │                  │
+│  frontend-design │  │                  │  │                  │
 │  code-reviewer   │  │                  │  │                  │
 │  opencode-agent  │  │                  │  │                  │
+│  researcher      │  │                  │  │                  │
+│  project-owner   │  │                  │  │                  │
 └──────────────────┘  └──────────────────┘  └──────────────────┘
                                 │
                                 ▼
-┌─────────────────────────────────────────────────────────────────┐
+ ┌─────────────────────────────────────────────────────────────────┐
 │                        COMMANDS                                 │
-├────────────────┬────────────────┬────────────────┬──────────────┤
-│  /openagent    │   /capture     │   /remember    │  /summarize  │
-│  Load full     │   Quick task   │   Save to      │  Session     │
-│  context       │   to inbox     │   long-term    │  summary     │
-└────────────────┴────────────────┴────────────────┴──────────────┘
+├──────────────────┬──────────────────┬──────────────────┬─────────┤
+│ /openagent       │ /capture         │ /remember        │ /summarize │
+│ Load full        │ Quick task       │ Save to          │ Session    │
+│ context          │ to inbox         │ long-term        │ summary    │
+├──────────────────┼──────────────────┼──────────────────┼─────────┤
+│ /opencode-agent  │ /researcher      │ /developer-1     │ /project   │
+│ System eng.      │ Tech research    │ Feature impl.    │ -owner     │
+├──────────────────┴──────────────────┴──────────────────┴─────────┤
+│ /frontend-designer                                            │
+│ UI/UX polish                                                    │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 **How it works:**
 1. **/openagent** loads your full context (SOUL + AGENT + Memory + Tasks)
-2. **Agents** handle specialized work (dev, frontend design, onboarding)
+2. **Agents** handle specialized work (dev, frontend design, onboarding, research)
 3. **Skills** provide expertise (OpenCode customization, system documentation)
-4. **Commands** capture ideas, save memories, summarize sessions
+4. **Commands** capture ideas, save memories, summarize sessions, or spawn agents
 5. **Workspaces** organize your projects by area
 
 ---
@@ -233,8 +243,7 @@ OpenAgent checks for updates automatically when you run `/openagent`. When an up
 
 To update:
 ```bash
-cd ~/openagent
-./system/scripts/update.sh
+cd ~/openagent && ./system/scripts/update.sh
 ```
 
 Your personal data (AGENT.md, memory, tasks, workspaces) is always preserved during updates.

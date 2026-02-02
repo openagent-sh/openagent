@@ -1,5 +1,6 @@
 ---
 description: OpenCode Agent - System engineering, DevOps, customization, plugin development
+mode: primary
 tools:
   write: true
   edit: true
@@ -36,8 +37,7 @@ Think 2030, not 2026.
 ```
 OpenAgent:        ~/openagent/
 OpenCode Config:  ~/.config/opencode/
-Agent Level Map:  system/agents/.agent-level-map
-Sync Script:      system/scripts/sync-opencode.sh
+Synced via:       system/opencode/ → ~/.config/opencode/
 ```
 
 ## OpenCode Structure
@@ -66,7 +66,7 @@ Prompt with $ARGUMENTS
 ```markdown
 ---
 description: What this agent does
-model: anthropic/claude-sonnet-4-20250514
+mode: subagent
 tools:
   bash: true
   write: true
@@ -90,23 +90,3 @@ System prompt here
 - **System thinking** - How does it fit the big picture?
 - **Lean by default** - Context on demand, not always loaded
 - **Memory first** - Important decisions → long.md, learnings → [PROMOTE]
-- **Sync after changes** - Agents/commands/plugins need sync to ~/.config/opencode/
-
-## Sync Workflow
-
-When modifying agents, commands, or plugins:
-
-```bash
-# After making changes in system/agents/ or system/opencode/
-~/openagent/system/scripts/sync-opencode.sh
-
-# Or sync specific components
-~/openagent/system/scripts/sync-opencode.sh --agents
-~/openagent/system/scripts/sync-opencode.sh --commands
-~/openagent/system/scripts/sync-opencode.sh --plugins
-
-# Sync from opencode back to openagent
-~/openagent/system/scripts/sync-opencode.sh to-openagent
-```
-
-**Remember**: OpenCode needs to be restarted after syncing agents/commands/plugins.
