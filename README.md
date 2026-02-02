@@ -1,29 +1,17 @@
 # OpenAgent - Your Cofounder for Life
 
+<img src="https://private-user-images.githubusercontent.com/203029907/543879632-c828df68-f914-4d6e-8f3c-4631e9cd9902.png" alt="OpenAgent Banner" width="100%">
+
 <p align="center">
-  <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://opencode.ai"><img src="https://img.shields.io/badge/Built%20with-OpenCode-blue" alt="Built with OpenCode"></a>
-  <a href="https://open-agent.sh"><img src="https://img.shields.io/badge/Website-open--agent.sh-green" alt="Website"></a>
-  <a href="https://x.com/openagent_"><img src="https://img.shields.io/badge/X-%40openagent__-black" alt="X"></a>
+  <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/badge/LICENSE-MIT-blue?style=flat-square&labelColor=333333" alt="License: MIT"></a>
+  <a href="https://opencode.ai"><img src="https://img.shields.io/badge/BUILT%20WITH-OPENCODE-5DADE2?style=flat-square&labelColor=333333" alt="Built with OpenCode"></a>
+  <a href="https://open-agent.sh"><img src="https://img.shields.io/badge/WEBSITE-open--agent.sh-52BE80?style=flat-square&labelColor=333333" alt="Website"></a>
+  <a href="https://x.com/openagent_"><img src="https://img.shields.io/badge/X-@OPENAGENT__-666666?style=flat-square&labelColor=333333" alt="X"></a>
 </p>
 
 > Your personal AI cofounder for life.
 
 A living AI agent system built on [OpenCode](https://opencode.ai) that makes you 10x more effective. Stop jumping between tools and contexts — build a system that grows with you.
-
----
-
-## Why should i use this?
-
-**The problem:** You use Claude Code, ChatGPT, OpenCode and Cursor - your context is scattered across different tools. Every time you start a new conversation, you're starting from zero.
-
-**The solution:** OpenAgent gives you a persistent, personalized AI system that knows who you are, what you're working on, how you work and grows with you. It's your base system that you build up from.
-
-Unlike other tools that overwhelm you with thousands of app connections and configuration options, OpenAgent focuses on what matters: getting things done. It's simple, modular and customizable to how you actually work.
-
----
-
-![OpenAgent Demo](https://github.com/user-attachments/assets/dd1535eb-fa39-4e96-bf61-6d9e92d1e9a6)
 
 ---
 
@@ -35,6 +23,20 @@ Unlike other tools that overwhelm you with thousands of app connections and conf
 - **Specialized Agents** — Onboarding, code review, frontend design, development — all ready to use
 - **Skills** — Built-in expertise on OpenCode and other tools
 - **Fully Modular** — Customize agents, commands, skills — make it yours
+
+---
+
+![OpenAgent Demo](https://github.com/user-attachments/assets/dd1535eb-fa39-4e96-bf61-6d9e92d1e9a6)
+
+---
+
+## Why should i use this?
+
+**The problem:** You use Claude Code, ChatGPT, OpenCode and Cursor - your context is scattered across different tools. Every time you start a new conversation, you're starting from zero.
+
+**The solution:** OpenAgent gives you a persistent, personalized AI system that knows who you are, what you're working on, how you work and grows with you. It's your base system that you build up from.
+
+Unlike other tools that overwhelm you with thousands of app connections and configuration options, OpenAgent focuses on what matters: getting things done. It's simple, modular and customizable to how you actually work.
 
 ---
 
