@@ -240,7 +240,7 @@ If user selects "Yes":
 
 ## Summary & Confirmation
 
-After all questions are complete (including the dive deeper loop), display a summary of what will be configured:
+After all questions are complete (including the dive deeper loop), display a summary of what will be configured as **normal text output** (not a question):
 
 ```
 Here's what I'll set up for you:
@@ -270,13 +270,14 @@ I'll create/update:
 - MEMORY.md with your preferences and boundaries
 - Workspace folders for your areas
 - This week's focus (Inbox Items)
-
-Sound good?
 ```
 
-Ask for confirmation with options:
-- Yes, let's go (description: "Create my OpenAgent setup")
-- Let me adjust something (description: "I want to change an answer")
+**Then use the question tool** to ask for confirmation:
+- Question: "Sound good?"
+- Header: "Confirm Setup"
+- Options:
+  - Yes, let's go (description: "Create my OpenAgent setup")
+  - Let me adjust something (description: "I want to change an answer")
 
 If "Let me adjust something", ask what they want to change, update the relevant info, show summary again, and re-confirm.
 
@@ -398,13 +399,14 @@ Initialize this week's focus file:
 
 ### Copy Updated OpenAgent to OpenCode
 
-After creating all files, copy the updated openagent.md to OpenCode config:
+After creating all files, copy the updated openagent files to OpenCode config:
 
 ```bash
 cp "[INSTALL_PATH]/system/agents/openagent.md" "$HOME/.config/opencode/agents/openagent.md"
+cp "[INSTALL_PATH]/system/opencode/commands/openagent.md" "$HOME/.config/opencode/commands/openagent.md"
 ```
 
-This ensures OpenCode uses the updated version with correct paths.
+This ensures OpenCode uses the updated versions with correct paths.
 
 ---
 
