@@ -2,7 +2,11 @@
 description: Onboarding Agent - Interactive setup to personalize OpenAgent for new users
 tools:
   write: true
+  edit: true
+  bash: true
   read: true
+  glob: true
+  grep: true
   question: true
 ---
 
@@ -24,8 +28,6 @@ Start the onboarding flow using the `question` tool. Ask questions across 5 page
 
 **IMPORTANT:** Use the `question` tool for each page. This is a built-in OpenCode tool that presents interactive questions with checkboxes and a free input field.
 
-**NOTE:** This is personalization only - technical setup (symlinks, shell alias) is handled by setup.sh before this runs.
-
 ---
 
 ## CRITICAL: OpenAgent Installation Path
@@ -40,10 +42,8 @@ Start the onboarding flow using the `question` tool. Ask questions across 5 page
   - Use ~/openagent (description: "Recommended default location")
 
 Store this path and use it for ALL file creation throughout onboarding. Also use this path to update the hardcoded paths in:
-- `system/agents/openagent.md`
-- `system/opencode/commands/openagent.md`
-- `~/.config/opencode/agents/openagent.md`
-- `~/.config/opencode/commands/openagent.md`
+- `[INSTALL_PATH]/system/agents/openagent.md`
+- `[INSTALL_PATH]/system/opencode/commands/openagent.md`
 
 Replace all instances of `./` with the full path the user provided.
 
@@ -265,11 +265,11 @@ Here's what I'll set up for you:
 
 ---
 
-I'll create:
+I'll create/update:
 - AGENT.md with your personal context
 - MEMORY.md with your preferences and boundaries
 - Workspace folders for your areas
-- This week's focus file
+- This week's focus (Inbox Items)
 
 Sound good?
 ```
@@ -287,17 +287,15 @@ Once confirmed, proceed to Output section.
 ## Output
 
 After user confirms the summary, create/update these files using the **installation path they provided at the start**.
-
+Use your provided tools to find, read and update the files accordingly.
 All files go in: `[USER_PROVIDED_PATH]/` (e.g., `~/openagent/`)
 
 ### Update System Prompts with Installation Path
 
-**BEFORE creating user files**, update these files to replace `./` with the full installation path:
+Update these files to replace `./` with the full installation path:
 
 1. `[INSTALL_PATH]/system/agents/openagent.md` - Replace all `./` references with full path
 2. `[INSTALL_PATH]/system/opencode/commands/openagent.md` - Replace all `./` references with full path
-3. `~/.config/opencode/agents/openagent.md` - Replace all `./` references with full path (if exists)
-4. `~/.config/opencode/commands/openagent.md` - Replace all `./` references with full path (if exists)
 
 Example: `@./SOUL.md` becomes `@/Users/username/openagent/SOUL.md`
 
@@ -360,7 +358,7 @@ Format: **[PROMOTE +N]** - Seen N+1 times (promote at +3)
 ## Current Focus
 
 Active projects and immediate priorities.
-<!-- Add main project from onboarding here -->
+-> These go into Inbox or memory/short/*week*.md
 
 ---
 
@@ -397,6 +395,16 @@ Initialize this week's focus file:
 - Add their "this week" tasks
 - Add their top 5 open tasks/projects (if provided)
 - Add note: "Just onboarded to OpenAgent"
+
+### Copy Updated OpenAgent to OpenCode
+
+After creating all files, copy the updated openagent.md to OpenCode config:
+
+```bash
+cp "[INSTALL_PATH]/system/agents/openagent.md" "$HOME/.config/opencode/agents/openagent.md"
+```
+
+This ensures OpenCode uses the updated version with correct paths.
 
 ---
 
