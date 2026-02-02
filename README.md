@@ -1,6 +1,6 @@
 # OpenAgent - Your Cofounder for Life
 
-<img src="https://private-user-images.githubusercontent.com/203029907/543879632-c828df68-f914-4d6e-8f3c-4631e9cd9902.png" alt="OpenAgent Banner" width="100%">
+<img src="https://private-user-images.githubusercontent.com/203029907/543879632-c828df68-f914-4d6e-8f3c-4631e9cd9902.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzAwNDkwODYsIm5iZiI6MTc3MDA0ODc4NiwicGF0aCI6Ii8yMDMwMjk5MDcvNTQzODc5NjMyLWM4MjhkZjY4LWY5MTQtNGQ2ZS04ZjNjLTQ2MzFlOWNkOTkwMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwMjAyJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDIwMlQxNjEzMDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02NTFhYTYzMzc0ZWRlNDg1NGQxZDMxYzFiZDdjNjdjYzlhMDk1MDM0OTQ1Y2Q1NGI2YjQ2YWMyZjJmZmJmMzAyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.eZfCs0htTxcEgkD5pRO6vwvBbUiynUMYc7VxvLarKLk" alt="OpenAgent Banner" width="100%">
 
 <p align="center">
   <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/badge/LICENSE-MIT-blue?style=flat-square&labelColor=333333" alt="License: MIT"></a>
