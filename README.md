@@ -59,6 +59,11 @@ This will:
 - Run interactive setup
 - Create symlinks to OpenCode config
 
+**Windows (PowerShell):**
+
+Windows users: use the Windows install skill at `system/skills/windows-install-skill/SKILL.md`. Clone this repo (or copy just that skill into your coding agent tool) and ask the agent to follow the steps. The Unix one-liner `curl -fsSL ... | bash` only works in WSL or Git Bash.
+
+
 **Manual install (for contributors):**
 
 ```bash
